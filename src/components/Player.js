@@ -8,7 +8,7 @@ const Player = (props) => {
     <div>
       <div className="w-full bg-black">
         <Iframe
-          url={`http://www.youtube.com/embed/${props.playingVideo}?rel=0`}
+          url={`https://www.youtube.com/embed/${props.playingVideo}?rel=0`}
           className="my-4 w-full h-72 sm:h-96 mx-auto"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
