@@ -7,7 +7,7 @@ const Hero = () => {
       <div className="lg:relative">
         <img
           src={HeroImg}
-          className=" max-w-half max-h-full"
+          className="w-full max-h-full"
           alt="Hero cover"
         />
         <div className="lg:absolute right-0 bottom-0 lg:bg-black lg:p-4">
@@ -19,7 +19,7 @@ const Hero = () => {
           </h2>
         </div>
       </div>
-      <div className="bg-black text-gray-50 mt-4 lg:mt-0 p-4 text-lg sm:text-2xl">
+      <div className="bg-black text-gray-50 mt-4 lg:mt-0 p-4 text-xl sm:text-2xl">
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi
           quas, a repudiandae nulla magni magnam eveniet itaque distinctio

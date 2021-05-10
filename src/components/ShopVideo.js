@@ -18,7 +18,10 @@ const ShopVideo = (props) => {
   };
 
   return (
-    <div className="border-2 border-black my-4 mx-2 py-2 text-black lg:hover:bg-gray-600 lg:hover:text-white lg:transform transition-transform duration-500 lg:hover:-translate-y-2">
+    <div
+      className="border-2 border-black my-4 mx-2 py-2 text-black lg:hover:bg-gray-600 
+    lg:hover:text-white lg:transform transition-transform duration-500 lg:hover:-translate-y-2"
+    >
       <div className="max-w-full my-auto flex" onClick={() => dispatchChain()}>
         <img
           src={props.thumbnail}
@@ -28,8 +31,7 @@ const ShopVideo = (props) => {
         <span
           className=" max-h-full w-3/6 my-auto text-lg lg:text-2xl"
           dangerouslySetInnerHTML={{ __html: props.title }}
-        >
-        </span>
+        ></span>
       </div>
     </div>
   );

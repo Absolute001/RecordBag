@@ -21,8 +21,6 @@ const Shop = () => {
   const currentChannel = channels.filter((channel) => channel.id === channelId);
   const dispatch = useDispatch();
 
-  console.log(currentChannel);
-
   useEffect(() => {
     if (videos.length === 0) {
       dispatch(fetchVideos(channelId));
@@ -38,10 +36,8 @@ const Shop = () => {
     <section className="p-4 max-w-screen-xl mx-auto">
       {/*  BACK BUTTON */}
 
-      <div>
-        <BackButton path="/" />
-        {currentUser && <CollectionButton path={`/collection`} />}
-      </div>
+      <BackButton path="/" />
+      {currentUser && <CollectionButton path={`/collection`} />}
 
       <div className="bg-black w-full h-32 sm:h-48 flex mb-4">
         <div className="h-full flex mx-auto sm:mx-0 sm:ml-8 p-4">
@@ -59,14 +55,17 @@ const Shop = () => {
       {/* ------ */}
 
       <div className="border-b-2 mb-4 border-black w-full">
-        <h1 className="p-1 font-bold text-2xl">Dig some records</h1>
+        <h1 className="p-1  text-4xl">Dig some records</h1>
       </div>
 
       {/*  VIDEO PREVIEW COMPONENT*/}
       <div className="flex flex-col md:grid grid-cols-2">
         {videos.length !== 0 &&
           videos[0].items.map((video, index) => (
-            <Link to={`/shop/${channelId}/player/${video.id.videoId}`}>
+            <Link
+              key={video.id.videoId}
+              to={`/shop/${channelId}/player/${video.id.videoId}`}
+            >
               <ShopVideo
                 videoId={video.id.videoId}
                 key={index}

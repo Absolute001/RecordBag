@@ -6,32 +6,39 @@ import "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../components/Loading";
 import { loadingHandler } from "../redux/fetch";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Collection = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.currentUser.user);
   const collection = useSelector((state) => state.currentUser.collection);
-  const docRef = appFirebase.firestore().collection("users").doc(user.email);
+  const docRef =
+    user && appFirebase.firestore().collection("users").doc(user.email);
   const loading = useSelector((state) => state.globalState.loading);
+  const history = useHistory();
 
   useEffect(() => {
-    docRef
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          console.log(data);
-          dispatch(handleCollection(data.likedRecords));
-          dispatch(loadingHandler(false));
-        } else {
-          console.log("No such document!");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
-      });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (user) {
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            console.log(data);
+            dispatch(handleCollection(data.likedRecords));
+            dispatch(loadingHandler(false));
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+    } else {
+      dispatch(loadingHandler(false));
+      history.push("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -39,20 +46,25 @@ const Collection = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div>
-          <h1 className="text-xl font-bold">{user.displayName}</h1>
-          {collection.map((record, index) => (
-            <Link to={`/shop/${record.channel}/player/${record.video}`}>
-              <ShopVideo
-                channel={record.channel}
-                id={index}
-                videoId={record.video}
-                title={record.title}
-                thumbnail={record.thumbnail}
-              />
-            </Link>
-          ))}
-        </div>
+        user && (
+          <div>
+            <h1 className="text-xl font-bold">{user.displayName}</h1>
+            {collection.map((record, index) => (
+              <Link
+                key={record.video}
+                to={`/shop/${record.channel}/player/${record.video}`}
+              >
+                <ShopVideo
+                  channel={record.channel}
+                  id={index}
+                  videoId={record.video}
+                  title={record.title}
+                  thumbnail={record.thumbnail}
+                />
+              </Link>
+            ))}
+          </div>
+        )
       )}
     </section>
   );

@@ -3,7 +3,7 @@ import React from "react";
 const DiscogsResults = (props) => {
   return (
     <div className="flex flex-col">
-      <h1 className="text-4xl my-12 border"> Here you can find this hottie:</h1>
+      <h1 className="text-4xl my-12"> Here you can find this hottie:</h1>
       <div className="flex flex-col md:flex-row border-black border-2 p-4 mb-12">
         <img
           className="w-40 h-40 clip-path mx-auto"

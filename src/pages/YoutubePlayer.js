@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import Iframe from "react-iframe";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../components/Loading";
-import { Link, useParams } from "react-router-dom";
-import ActionsMenu from "../components/ActionsMenu";
+import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import DiscogsResults from "../components/DiscogsResults";
 import { fetchVideoFromParams, fetchDiscogs } from "../redux/fetch";
 import CollectionButton from "../components/CollectionButton";
+import Player from "../components/Player";
 
 const YoutubePlayer = () => {
   const playingVideo = useSelector((state) => state.globalState.playingVideo);
@@ -31,46 +30,19 @@ const YoutubePlayer = () => {
   return loading ? (
     <Loading />
   ) : (
-    <section className="max-w-screen-xl mx-auto p-4 h-auto">
+    <section className="max-w-screen-xl min-h-screen mx-auto p-4 h-auto">
       <div>
         <BackButton path={`/shop/${channelId}`} />
         {currentUser && <CollectionButton path={`/collection`} />}
       </div>
 
-      <div className="w-full bg-black">
-        <Iframe
-          url={`http://www.youtube.com/embed/${playingVideo.videoId}?rel=0`}
-          className="my-4 w-full h-72 sm:h-96 mx-auto"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
-      <div className="border-b border-black flex flex-col lg:flex-row">
-        <div className="flex flex-col lg:w-4/6">
-          <h1
-            className="text-4xl font-bold"
-            dangerouslySetInnerHTML={{ __html: playingVideo.title }}
-          ></h1>
-          <p
-            className="my-8 text-xl"
-            dangerouslySetInnerHTML={{ __html: playingVideo.description }}
-          ></p>
-        </div>
-        {currentUser ? (
-          <ActionsMenu />
-        ) : (
-          <h1 className="text-xl font-bold mx-auto mb-4">
-            <Link to="/signup" className="text-blue-500">
-              Sign Up
-            </Link>{" "}
-            or{" "}
-            <Link to="/login" className="text-blue-500">
-              Login
-            </Link>{" "}
-            to put this amazing record in your bag!
-          </h1>
-        )}
-      </div>
+      <Player
+        playingVideo={playingVideo.videoId}
+        title={playingVideo.title}
+        description={playingVideo.description}
+        isLogged={currentUser}
+      />
+
       {discogsRecord && discogsRecord.results.length !== 0 ? (
         <DiscogsResults
           cover={discogsRecord.results[0].cover_image}

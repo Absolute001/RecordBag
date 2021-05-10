@@ -131,7 +131,6 @@ const SignUp = () => {
               />
               <button
                 type="submit"
-                disabled
                 className="disabled:opacity-50 disabled:cursor-not-allowed bg-green-500 w-2/6 p-2 mx-auto"
               >
                 Join
