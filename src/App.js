@@ -29,10 +29,10 @@ const App = () => {
           <Route exact path="/shop/:channelId/player/:videoId">
             <YoutubePlayer />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignUp />
           </Route>
         </Switch>
