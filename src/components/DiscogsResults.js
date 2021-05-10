@@ -34,6 +34,8 @@ const DiscogsResults = (props) => {
           </p>
           <a
             href={`https://discogs.com${props.uri}`}
+            target="_blank"
+            rel="noreferrer"
             className="text-blue-500 font-bold lg:hover:text-blue-600 col-start-2 col-end-3"
           >
             Buy Here
