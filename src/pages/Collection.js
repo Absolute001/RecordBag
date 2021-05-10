@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Loading from "../components/Loading";
 import { loadingHandler } from "../redux/fetch";
 import { Link, useHistory } from "react-router-dom";
-import { handleUser } from "../redux/currentUser";
 
 const Collection = () => {
   const dispatch = useDispatch();
@@ -42,6 +41,7 @@ const Collection = () => {
         history.push("/login");
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
  
