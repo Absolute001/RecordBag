@@ -116,7 +116,7 @@ const SignUp = () => {
                 className="border mb-8 text-sm p-2 text-black"
                 placeholder="kevinshallvari@yahoo.com"
                 value={email}
-                onChange={(event) => dispatch(emailHandler(event.target.value))}
+                onChange={(event) => dispatch(emailHandler(event.target.value.toLowerCase()))}
               />
               <label>Password:</label>
               <input
