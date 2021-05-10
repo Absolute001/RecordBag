@@ -8,6 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetSignUp } from "../redux/userSignUp";
 import { resetLogin } from "../redux/userLogIn";
 import { loadingHandler } from "../redux/fetch";
+import { handleUser } from "../redux/currentUser";
+
+
 
 const Navbar = () => {
   const currentUser = useSelector((state) => state.currentUser);
@@ -17,6 +20,13 @@ const Navbar = () => {
   const handleSignOut = () => {
     appFirebase.auth().signOut();
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    appFirebase.auth().onAuthStateChanged((user) => {
+      dispatch(handleUser(user));
+    });
+  }, []);
 
   useEffect(() => {
     dispatch(resetSignUp());
