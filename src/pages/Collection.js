@@ -26,7 +26,7 @@ const Collection = () => {
             if (doc.exists) {
               const data = doc.data();
               console.log(data);
-              dispatch(handleCollection(data.likedRecords));
+              dispatch(handleCollection(data.likedRecords.reverse()));
               dispatch(loadingHandler(false));
             } else {
               console.log("No such document!");
