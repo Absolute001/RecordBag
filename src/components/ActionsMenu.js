@@ -46,6 +46,10 @@ const ActionsMenu = () => {
   return (
     <nav className="flex p-4 text-6xl max-w-xs justify-center mx-auto my-auto">
       <img
+        onClick={(e) => {
+          e.preventDefault();
+          alert("This functionality is coming soon...");
+        }}
         src={hotRecord}
         className="my-auto w-12 h-12 mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 "
         alt="Tell other users that this record is hot"
