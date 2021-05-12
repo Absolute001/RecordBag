@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ShopVideo from "../components/ShopVideo";
-import { handleCollection, handleUser } from "../redux/currentUser";
+import { handleCollection } from "../redux/currentUser";
 import appFirebase from "../firebase/firebase";
 import "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
