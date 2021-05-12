@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ShopVideo from "../components/ShopVideo";
-import { handleCollection } from "../redux/currentUser";
+import { handleCollection, handleUser } from "../redux/currentUser";
 import appFirebase from "../firebase/firebase";
 import "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,7 +20,6 @@ const Collection = () => {
     appFirebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const docRef = appFirebase.firestore().collection("users").doc(user.email);
-
         docRef
           .get()
           .then((doc) => {
@@ -42,7 +41,7 @@ const Collection = () => {
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
  
 
