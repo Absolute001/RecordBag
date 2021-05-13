@@ -17,6 +17,7 @@ const Collection = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    loadingHandler(true)
     appFirebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const docRef = appFirebase.firestore().collection("users").doc(user.email);
@@ -25,7 +26,6 @@ const Collection = () => {
           .then((doc) => {
             if (doc.exists) {
               const data = doc.data();
-              console.log(data);
               dispatch(handleCollection(data.likedRecords.reverse()));
               dispatch(loadingHandler(false));
             } else {
@@ -41,21 +41,20 @@ const Collection = () => {
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, []);
 
  
 
   return (
-    <section className="p-4 mb-4 lg:mb-24 max-w-screen-xl mx-auto">
+    <section className="p-4 mb-4 lg:mb-24 min-h-screen max-w-screen-xl mx-auto">
       {loading ? (
         <Loading />
       ) : (
-        user && (
+        user && collection && (
           <div>
             {/* user account section */}
 
             <div className="flex">
-              <input type="file" id="uploadPic" name="uploadPic" />
               <h1 className="text-xl font-bold p-2">{user.displayName}</h1>
             </div>
 

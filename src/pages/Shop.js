@@ -22,7 +22,7 @@ const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (videos.length === 0) {
+    if (currentChannel) {
       dispatch(fetchVideos(channelId));
     }
     if (channels.length === 0) {
@@ -41,14 +41,18 @@ const Shop = () => {
 
       <div className="bg-black w-full h-32 sm:h-48 flex mb-4">
         <div className="h-full flex mx-auto sm:mx-0 sm:ml-8 p-4">
-          <img
-            src={currentChannel[0].snippet.thumbnails.high.url}
-            className="w-20 sm:h-36 sm:w-36 rounded-full my-auto mx-auto border-4 border-gray-50"
-            alt="shop thumbnail"
-          />
-          <h1 className="text-white ml-8 font-bold my-auto text-2xl sm:text-6xl uppercase">
-            {currentChannel[0].snippet.title} Shop
-          </h1>
+          {currentChannel.length !== 0 && (
+            <>
+              <img
+                src={currentChannel[0].thumbnail}
+                className="w-20 sm:h-36 sm:w-36 rounded-full my-auto mx-auto border-4 border-gray-50"
+                alt="shop thumbnail"
+              />
+              <h1 className="text-white ml-8 font-bold my-auto text-2xl sm:text-6xl uppercase">
+                {currentChannel[0].title} Shop
+              </h1>
+            </>
+          )}
         </div>
       </div>
 

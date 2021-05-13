@@ -3,14 +3,10 @@ import HeroImg from "./img/hero.jpeg";
 
 const Hero = () => {
   return (
-    <section className="p-4 mt-4 lg:mt-16 pb-0 max-w-screen-xl mx-auto">
+    <section className="p-4 lg:mt-16 pb-0 max-w-screen-xl mx-auto">
       <div className="lg:relative">
-        <img
-          src={HeroImg}
-          className="w-full max-h-full"
-          alt="Hero cover"
-        />
-        <div className="lg:absolute right-0 bottom-0 lg:bg-black lg:p-4">
+        <img src={HeroImg} className="w-full max-h-full" alt="Hero cover" />
+        <div className="lg:absolute justify-end right-0 bottom-0 lg:bg-black lg:p-4">
           <h1 className="text-6xl mt-4 lg:mt-0 md:text-8xl font-bold text-black lg:text-gray-100">
             Welcome to RecordBAG
           </h1>
@@ -19,7 +15,7 @@ const Hero = () => {
           </h2>
         </div>
       </div>
-      <div className="bg-black text-gray-50 mt-4 lg:mt-0 p-4 text-xl sm:text-2xl">
+      <div className="bg-black text-gray-50 mt-4 lg:mt-0 p-4 text-xl sm:text-2xl lg:text-3xl">
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi
           quas, a repudiandae nulla magni magnam eveniet itaque distinctio

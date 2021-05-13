@@ -10,6 +10,8 @@ import appFirebase from "../firebase/firebase";
 import { useHistory } from "react-router-dom";
 import { loadingHandler } from "../redux/fetch";
 import Loading from "../components/Loading";
+import { resetLogin } from "../redux/userLogIn";
+
 
 const LogIn = () => {
   const email = useSelector((state) => state.userLogInState.email);
@@ -25,6 +27,7 @@ const LogIn = () => {
       dispatch(loadingHandler(true));
       await appFirebase.auth().signInWithEmailAndPassword(email, password);
       dispatch(loadingHandler(false));
+      dispatch(resetLogin()); 
       history.push("/");
     } catch (error) {
       dispatch(loadingHandler(false));

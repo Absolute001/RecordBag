@@ -1,4 +1,5 @@
 import axios from "axios";
+import appFirebase from "../firebase/firebase";
 
 const globalState = {
   channel: [],
@@ -16,33 +17,30 @@ const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
 const discogsKey = process.env.REACT_APP_DISCOGS_KEY;
 const discogsSecret = process.env.REACT_APP_DISCOGS_SECRET;
 
-/* const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
-const discogsKey = process.env.REACT_APP_DISCORD_API_KEY;
-const discogsSecret = process.env.REACT_APP_DISCORD_SECRET_KEY; */
-
-const shopIds = [
-  "UC_9j-jI_P6heeJpQRvz0eOw",
-  "UCv0Ufd_Af9VBEi6xoW6ZTfw",
-  "UC41Owmnn9xs-7wjIQn1orBg",
-  "UCqSMQXJ8MieGFIxgZNDeLdQ",
-];
-
 /* FETCH FROM YOUTUBE THE CHANNELS RETURNING THE CHANNEL INFOS NEEDED TO RENDER THEM */
 export const fetchChannel = () => {
   return async (dispatch) => {
     dispatch({ type: "LOADING_HANDLER", payload: true });
-    for (let i = 0; i < shopIds.length; i++) {
-      try {
-        const resp = await axios.get(
-          `${baseUrl}channels?part=snippet&id=${shopIds[i]}&key=${apiKey}`
-        );
-        dispatch({
-          type: "FETCH_CHANNEL",
-          payload: resp.data.items[0],
-        });
-      } catch (error) {
-        console.log(error);
+    try {
+      const respFirestore = await appFirebase
+        .firestore()
+        .collection("shops")
+        .get();
+      for (let i = 0; i < respFirestore.docs.length; i++) {
+        await appFirebase
+          .firestore()
+          .collection("shops")
+          .doc(respFirestore.docs[i].id)
+          .get()
+          .then((doc) =>
+            dispatch({
+              type: "FETCH_CHANNEL",
+              payload: doc.data(),
+            })
+          );
       }
+    } catch (error) {
+      console.log(error);
     }
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
@@ -115,6 +113,8 @@ export const fetchDiscogs = (title) => {
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
 };
+
+/*THIS FUNCTION FETCH VIDEO FROM URL PARAMS IN CASE USER WANTS TO SHARE SOME RECORD ACROSS THE WEB */
 
 export const fetchVideoFromParams = (videoId) => {
   return async (dispatch) => {

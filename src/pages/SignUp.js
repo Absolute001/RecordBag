@@ -13,6 +13,7 @@ import appFirebase from "../firebase/firebase";
 import "firebase/firestore";
 import { loadingHandler } from "../redux/fetch";
 import Loading from "../components/Loading";
+import { resetSignUp } from "../redux/userSignUp";
 
 const SignUp = () => {
   const fname = useSelector((state) => state.userSignUpState.fname);
@@ -46,6 +47,7 @@ const SignUp = () => {
         likedRecords: [],
       });
       dispatch(loadingHandler(false));
+      dispatch(resetSignUp());
       history.push("/");
     } catch (error) {
       dispatch(loadingHandler(false));
@@ -116,7 +118,9 @@ const SignUp = () => {
                 className="border mb-8 text-sm p-2 text-black"
                 placeholder="kevinshallvari@yahoo.com"
                 value={email}
-                onChange={(event) => dispatch(emailHandler(event.target.value.toLowerCase()))}
+                onChange={(event) =>
+                  dispatch(emailHandler(event.target.value.toLowerCase()))
+                }
               />
               <label>Password:</label>
               <input

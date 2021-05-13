@@ -27,7 +27,7 @@ const userLoginReducer = (state = userState, action) => {
     case "PASSWORD_LOGIN_HANDLER":
       return { ...state, password: action.payload };
     case "RESET_LOGIN":
-      return { email: "", password: "" };
+      return { ...state, email: "", password: "" };
     case "ERROR_LOGIN_HANDLER":
       return {
         email: "",

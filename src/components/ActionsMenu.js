@@ -7,7 +7,7 @@ import firebase from "firebase/app";
 import { clickHandler } from "../redux/utils";
 import { useParams } from "react-router-dom";
 
-const ActionsMenu = () => {
+const ActionsMenu = (props) => {
   const dispatch = useDispatch();
   const clicked = useSelector((state) => state.utilState.clicked);
   const user = useSelector((state) => state.currentUser.user);
@@ -60,10 +60,10 @@ const ActionsMenu = () => {
           handleAddCollection();
           setTimeout(() => {
             dispatch(clickHandler(false));
-          }, 1200);
+          }, 1000);
         }}
         src={addToCollection}
-        className={`w-16 mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 ${
+        className={`w-16 mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
           clicked && "animate animate-ping"
         }`}
         alt="Add to your personal collection"

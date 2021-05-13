@@ -22,7 +22,7 @@ const ShopThumbnail = (props) => {
         className="mx-auto h-42 w-full md:w-3/6 border-8 border-gray-50"
         alt="shop thumbnail"
       />
-      <h1 className="bg-gray-50 p-4 md:w-3/6 mx-auto text-black text-3xl uppercase">
+      <h1 className="bg-gray-50 p-4 md:w-3/6 mx-auto text-gray-700 text-3xl uppercase">
         {props.name}
       </h1>
     </Link>
