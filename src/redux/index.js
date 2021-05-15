@@ -7,6 +7,8 @@ import userLogInReducer from "./userLogIn";
 import handleUserReducer from "./currentUser";
 import utilReducer from "./utils";
 
+
+
 const rootReducer = combineReducers({
   globalState: fetchReducer,
   userSignUpState: userSignUpReducer,

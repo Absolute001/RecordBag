@@ -65,6 +65,7 @@ const Shop = () => {
         {videos.length !== 0 &&
           videos[0].map((video, index) => (
             <Link
+              className="mx-2 my-4 "
               key={video.id.videoId}
               to={`/shop/${channelId}/player/${video.id.videoId}`}
             >
