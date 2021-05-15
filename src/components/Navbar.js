@@ -5,7 +5,6 @@ import appFirebase from "../firebase/firebase";
 import { AiOutlineLogout } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { loadingHandler } from "../redux/fetch";
 import { handleUser } from "../redux/currentUser";
 
 const Navbar = () => {
@@ -40,10 +39,7 @@ const Navbar = () => {
 
         {currentUser.user ? (
           <div className="flex items-center font-semibold md:text-xl">
-            <Link
-              to="/collection"
-              onClick={() => dispatch(loadingHandler(true))}
-            >
+            <Link to="/collection">
               <h1 className="mr-2 sm:mr-4 text-base sm:text-xl">
                 {currentUser.user.displayName}{" "}
               </h1>

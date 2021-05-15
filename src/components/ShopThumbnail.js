@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchVideos, loadingHandler, pageFlagHandler } from "../redux/fetch";
+import { fetchVideos, loadingHandler } from "../redux/fetch";
+import { pageFlagHandler } from "../redux/utils";
 
 const ShopThumbnail = (props) => {
   const dispatch = useDispatch();

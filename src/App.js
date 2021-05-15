@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Loading from "../src/components/Loading";
 import AllShops from "./pages/AllShops";
 import Shop from "./pages/Shop";
 import Footer from "./components/Footer";
@@ -10,6 +12,7 @@ import Hero from "./components/Hero";
 import Login from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 const App = () => {
+  const loading = useSelector((state) => state.globalState.loading);
 
   return (
     <main>
@@ -17,8 +20,8 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/">
-              <Hero />
-              <AllShops />
+            {loading ? <Loading /> : <Hero />}
+            <AllShops />
           </Route>
           <Route path="/collection">
             <Collection />

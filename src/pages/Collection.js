@@ -17,10 +17,13 @@ const Collection = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    loadingHandler(true)
     appFirebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        const docRef = appFirebase.firestore().collection("users").doc(user.email);
+        loadingHandler(true);
+        const docRef = appFirebase
+          .firestore()
+          .collection("users")
+          .doc(user.email);
         docRef
           .get()
           .then((doc) => {
@@ -40,17 +43,16 @@ const Collection = () => {
         history.push("/login");
       }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
- 
 
   return (
     <section className="p-4 mb-4 lg:mb-24 min-h-screen max-w-screen-xl mx-auto">
       {loading ? (
         <Loading />
       ) : (
-        user && collection && (
+        user &&
+        collection && (
           <div>
             {/* user account section */}
 

@@ -4,7 +4,6 @@ import appFirebase from "../firebase/firebase";
 const globalState = {
   channel: [],
   shopVideos: [],
-  pageFlag: 1,
   playingVideo: "",
   loading: true,
   discogsRes: null,
@@ -39,24 +38,34 @@ export const fetchChannel = () => {
             })
           );
       }
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      console.log(e.message);
     }
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
 };
 
 /* GIVEN THE CHANNEL ID FETCH THE CHANNELS VIDEOS FROM IT (MAX 50 ITEMS) AND RETURN RESULTS IN STATE TO RENDER THEM */
+/* IF A CHANNEL HAS BEEN VISITED IT TAKES IT FROM THE LOCAL STORAGE */
 export const fetchVideos = (channelId) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING_HANDLER", payload: true });
-    await axios
-      .get(
-        `${baseUrl}search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=50&key=${apiKey}`
-      )
-      .then((res) => {
-        dispatch({ type: "FETCH_VIDEOS", payload: res.data });
+    if (localStorage.getItem(channelId)) {
+      dispatch({
+        type: "FETCH_VIDEOS",
+        payload: JSON.parse(localStorage.getItem(channelId)),
       });
+    } else {
+      await axios
+        .get(
+          `${baseUrl}search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=50&key=${apiKey}`
+        )
+        .then((res) => {
+          localStorage.setItem(channelId, JSON.stringify(res.data.items));
+          dispatch({ type: "FETCH_VIDEOS", payload: res.data.items });
+        })
+        .catch((e) => e.message);
+    }
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
 };
@@ -139,11 +148,6 @@ export const fetchVideoFromParams = (videoId) => {
   };
 };
 
-/* IT KEEPS STATE OF WICH PAGE OF VIDEOS IT'S SHOWN  */
-export const pageFlagHandler = (num = 0) => {
-  return { type: "PAGE_FLAG_HANDLER", payload: num };
-};
-
 /* EVERYTIME SOMETHING NEEDS TIME TO BE COMPLETED WILL NEED THIS FUNCTION TO RENDER THE LOADING ANIMATION */
 export const loadingHandler = (bool = true) => {
   return { type: "LOADING_HANDLER", payload: bool };
@@ -165,18 +169,6 @@ const fetchReducer = (state = globalState, action) => {
       };
     case "FETCH_VIDEOS":
       return { ...state, shopVideos: [action.payload] };
-    case "PAGE_FLAG_HANDLER":
-      if (action.payload === 0) {
-        return {
-          ...state,
-          pageFlag: action.payload,
-        };
-      } else {
-        return {
-          ...state,
-          pageFlag: state.pageFlag + action.payload,
-        };
-      }
     case "PLAYING_VIDEO":
       return { ...state, playingVideo: action.payload };
     case "FETCH_DISCOGS":

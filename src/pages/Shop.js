@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPageHandler, fetchVideos, pageFlagHandler } from "../redux/fetch";
-import ShopVideo from "../components/ShopVideo";
+import { fetchPageHandler, fetchVideos, fetchChannel } from "../redux/fetch";
+import { pageFlagHandler } from "../redux/utils";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
-import Loading from "../components/Loading";
 import { useParams, Link } from "react-router-dom";
 import BackButton from "../components/BackButton";
-import { fetchChannel } from "../redux/fetch";
 import CollectionButton from "../components/CollectionButton";
+import ShopVideo from "../components/ShopVideo";
+import Loading from "../components/Loading";
 
 const Shop = () => {
   const { channelId } = useParams();
@@ -22,18 +22,16 @@ const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentChannel) {
-      dispatch(fetchVideos(channelId));
-    }
     if (channels.length === 0) {
       dispatch(fetchChannel());
+      dispatch(fetchVideos(channelId));
     }
   }, []);
 
   return loading ? (
     <Loading />
   ) : (
-    <section className="p-4 max-w-screen-xl mx-auto">
+    <section className="p-4 max-w-screen-xl mx-auto min-h-screen">
       {/*  BACK BUTTON */}
 
       <BackButton path="/" />
@@ -65,7 +63,7 @@ const Shop = () => {
       {/*  VIDEO PREVIEW COMPONENT*/}
       <div className="flex flex-col md:grid grid-cols-2">
         {videos.length !== 0 &&
-          videos[0].items.map((video, index) => (
+          videos[0].map((video, index) => (
             <Link
               key={video.id.videoId}
               to={`/shop/${channelId}/player/${video.id.videoId}`}

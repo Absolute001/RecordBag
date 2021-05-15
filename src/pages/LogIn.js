@@ -72,7 +72,7 @@ const LogIn = () => {
                 className="border mb-8 text-sm p-2 text-black"
                 placeholder="kevinshallvari@yahoo.com"
                 value={email}
-                onChange={(e) => dispatch(emailLoginHandler(e.target.value))}
+                onChange={(e) => dispatch(emailLoginHandler(e.target.value.toLowerCase().trim()))}
               />
               <label>Password:</label>
               <input
