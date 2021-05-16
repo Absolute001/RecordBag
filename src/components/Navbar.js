@@ -1,29 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React from "react";
 import Logo from "./img/Logo.png";
 import appFirebase from "../firebase/firebase";
 import { AiOutlineLogout } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { handleUser } from "../redux/currentUser";
+import { useSelector} from "react-redux";
 
 const Navbar = () => {
   const currentUser = useSelector((state) => state.currentUser);
   const history = useHistory();
-  const dispatch = useDispatch();
-
   const handleSignOut = () => {
     appFirebase.auth().signOut();
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (currentUser === null) {
-      appFirebase.auth().onAuthStateChanged((user) => {
-        dispatch(handleUser(user));
-      });
-    }
-  }, []);
 
   return (
     <nav className=" bg-gray-100 w-full">

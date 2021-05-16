@@ -53,27 +53,28 @@ const Collection = () => {
       ) : (
         user &&
         collection && (
-          <div>
+          <div className="flex flex-col">
             {/* user account section */}
 
-            <div className="flex">
-              <h1 className="text-xl font-bold p-2">{user.displayName}</h1>
-            </div>
+            <h1 className="text-xl font-bold p-2">{user.displayName}</h1>
 
-            {collection.map((record, index) => (
-              <Link
-                key={record.video}
-                to={`/shop/${record.channel}/player/${record.video}`}
-              >
-                <ShopVideo
-                  channel={record.channel}
-                  id={index}
-                  videoId={record.video}
-                  title={record.title}
-                  thumbnail={record.thumbnail}
-                />
-              </Link>
-            ))}
+            <div className="flex flex-col md:grid grid-cols-2">
+              {collection.map((record, index) => (
+                <Link
+                  className="mx-2 my-4"
+                  key={record.video}
+                  to={`/shop/${record.channel}/player/${record.video}`}
+                >
+                  <ShopVideo
+                    channel={record.channel}
+                    id={index}
+                    videoId={record.video}
+                    title={record.title}
+                    thumbnail={record.thumbnail}
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
         )
       )}
