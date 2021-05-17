@@ -30,7 +30,12 @@ const ShopVideo = (props) => {
         />
         <span
           className=" max-h-full w-3/6 my-auto text-lg lg:text-2xl"
-          dangerouslySetInnerHTML={{ __html: props.title }}
+          dangerouslySetInnerHTML={{
+            __html:
+              props.title.length > 30
+                ? `${props.title.substring(0,30 )}...`
+                : props.title,
+          }}
         ></span>
       </div>
     </div>

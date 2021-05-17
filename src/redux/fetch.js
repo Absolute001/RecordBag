@@ -55,14 +55,15 @@ export const fetchVideos = (channelId) => {
         type: "FETCH_VIDEOS",
         payload: JSON.parse(localStorage.getItem(channelId)),
       });
+      console.log(JSON.parse(localStorage.getItem(channelId)))
     } else {
       await axios
         .get(
           `${baseUrl}search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=50&key=${apiKey}`
         )
         .then((res) => {
-          localStorage.setItem(channelId, JSON.stringify(res.data.items));
-          dispatch({ type: "FETCH_VIDEOS", payload: res.data.items });
+          localStorage.setItem(channelId, JSON.stringify(res.data));
+          dispatch({ type: "FETCH_VIDEOS", payload: res.data});
         })
         .catch((e) => e.message);
     }
@@ -142,7 +143,6 @@ export const fetchVideoFromParams = (videoId) => {
             thumbnail: item.snippet.thumbnails.default.url,
           },
         });
-        console.log(res.data);
         dispatch({ type: "LOADING_HANDLER", payload: false });
       });
   };

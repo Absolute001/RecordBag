@@ -1,11 +1,11 @@
 import React from "react";
 import Iframe from "react-iframe";
-import {Link} from "react-router-dom";
 import ActionsMenu from "../components/ActionsMenu";
+import { Link } from "react-router-dom";
 
 const Player = (props) => {
   return (
-    <div>
+    <>
       <div className="w-full bg-black">
         <Iframe
           url={`https://www.youtube.com/embed/${props.playingVideo}?rel=0`}
@@ -25,6 +25,7 @@ const Player = (props) => {
             dangerouslySetInnerHTML={{ __html: props.description }}
           ></p>
         </div>
+
         {props.isLogged ? (
           <ActionsMenu />
         ) : (
@@ -40,7 +41,7 @@ const Player = (props) => {
           </h1>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

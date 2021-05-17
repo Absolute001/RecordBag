@@ -1,26 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
 import ShopThumbnail from "../components/ShopThumbnail";
-import { fetchChannel } from "../redux/fetch";
-import { handleUser } from "../redux/currentUser";
-import appFirebase from "../firebase/firebase";
 import Slider from "react-slick";
-
-const AllShops = () => {
-  const channels = useSelector((state) => state.globalState.channel);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    appFirebase.auth().onAuthStateChanged((user) => {
-      dispatch(handleUser(user));
-    });
-    if (channels.length === 0) {
-      dispatch(fetchChannel());
-    }
-  }, []);
-
+const AllShops = (props) => {
   const settings = {
     dots: true,
     fade: true,
@@ -38,9 +20,9 @@ const AllShops = () => {
         <h1 className="text-center text-white lg:text-6xl text-4xl pt-4 font-bold">
           SHOPS
         </h1>
-        <div className="lg:mb-16 p-8 xl:px-48 xl:pb-16 ">
-          <Slider {...settings}>
-            {channels.map((channel, index) => (
+        <div className="lg:mb-16 p-8 xl:px-48 pb-16">
+          <Slider className="md:w-3/6 mx-auto"{...settings}>
+            {props.channels.map((channel, index) => (
               <ShopThumbnail
                 key={index}
                 channelId={channel.id}

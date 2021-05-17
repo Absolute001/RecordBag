@@ -16,18 +16,10 @@ const utilReducer = (state = utilState, action) => {
     case "CLICK_HANDLER":
       return { ...state, clicked: action.payload };
     case "PAGE_FLAG_HANDLER":
-      if (action.payload === 0) {
-        return {
-          ...state,
-          pageFlag: action.payload,
-        };
-      } else {
-        return {
-          ...state,
-          pageFlag: state.pageFlag + action.payload,
-        };
-      }
-
+      return {
+        ...state,
+        pageFlag: state.pageFlag + action.payload,
+      };
     default:
       return state;
   }

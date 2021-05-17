@@ -16,14 +16,14 @@ const ShopThumbnail = (props) => {
         dispatch(pageFlagHandler(0));
         dispatch(fetchVideos(props.channelId));
       }}
-      className=" text-center text-2xl font-bold"
+      className="text-center text-2xl font-bold"
     >
       <img
         src={props.thumbnail}
-        className="mx-auto h-42 w-full md:w-3/6 border-8 border-gray-50"
+        className="w-full border-8 border-gray-50"
         alt="shop thumbnail"
       />
-      <h1 className="bg-gray-50 p-4 md:w-3/6 mx-auto text-gray-700 text-3xl uppercase">
+      <h1 className="bg-gray-50 p-4 w-full mx-auto text-gray-700 text-xl md:text-3xl uppercase">
         {props.name}
       </h1>
     </Link>

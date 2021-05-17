@@ -14,7 +14,7 @@ const Shop = () => {
   const { channelId } = useParams();
 
   const videos = useSelector((state) => state.globalState.shopVideos);
-  const pageFlag = useSelector((state) => state.globalState.pageFlag);
+  const pageFlag = useSelector((state) => state.utilState.pageFlag);
   const loading = useSelector((state) => state.globalState.loading);
   const channels = useSelector((state) => state.globalState.channel);
   const currentUser = useSelector((state) => state.currentUser.user);
@@ -63,7 +63,7 @@ const Shop = () => {
       {/*  VIDEO PREVIEW COMPONENT*/}
       <div className="flex flex-col md:grid grid-cols-2">
         {videos.length !== 0 &&
-          videos[0].map((video, index) => (
+          videos[0].items.map((video, index) => (
             <Link
               className="mx-2 my-4 "
               key={video.id.videoId}
@@ -99,7 +99,7 @@ const Shop = () => {
               }}
             />
           )}
-          <h1 className="text-2xl px-2">{pageFlag}</h1>
+          <h1 className="text-2xl px-2 text-black">{pageFlag}</h1>
           {videos.length !== 0 && videos[0].nextPageToken && (
             <MdNavigateNext
               className="my-auto cursor-pointer"
