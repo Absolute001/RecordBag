@@ -25,7 +25,7 @@ const Collection = () => {
           <h1 className="text-xl font-bold p-2">{user.displayName}</h1>
 
           <div className="flex flex-col md:grid grid-cols-2">
-            {collection.map((record, index) => (
+            {collection.reverse().map((record, index) => (
               <Link
                 className="md:mx-2 my-4"
                 key={record.video}
