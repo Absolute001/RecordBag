@@ -1,14 +1,9 @@
-import 'axios'
 
 const currentUserState = {
   user: null,
   collection: null,
   error: null,
 };
-/* 
-export const fetchUserCollection =(videos){
-
-} */
 
 export const handleUser = (user) => {
   return { type: "HANDLE_USER", payload: user };

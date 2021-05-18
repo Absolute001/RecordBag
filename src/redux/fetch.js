@@ -55,7 +55,7 @@ export const fetchVideos = (channelId) => {
         type: "FETCH_VIDEOS",
         payload: JSON.parse(localStorage.getItem(channelId)),
       });
-      console.log(JSON.parse(localStorage.getItem(channelId)))
+      console.log(JSON.parse(localStorage.getItem(channelId)));
     } else {
       await axios
         .get(
@@ -63,7 +63,7 @@ export const fetchVideos = (channelId) => {
         )
         .then((res) => {
           localStorage.setItem(channelId, JSON.stringify(res.data));
-          dispatch({ type: "FETCH_VIDEOS", payload: res.data});
+          dispatch({ type: "FETCH_VIDEOS", payload: res.data });
         })
         .catch((e) => e.message);
     }
