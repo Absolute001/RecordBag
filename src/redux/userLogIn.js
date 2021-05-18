@@ -4,6 +4,8 @@ const userState = {
   error: null,
 };
 
+/*THOSE ACTIONS HANDLES THE LOGIN FORM */
+
 export const emailLoginHandler = (value) => {
   return { type: "EMAIL_LOGIN_HANDLER", payload: value };
 };

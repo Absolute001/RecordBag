@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPageHandler, fetchVideos, fetchChannel } from "../redux/fetch";
+import { fetchPageHandler, fetchVideos } from "../redux/fetch";
 import { pageFlagHandler } from "../redux/utils";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import { useParams, Link } from "react-router-dom";
@@ -22,8 +22,7 @@ const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (channels.length === 0) {
-      dispatch(fetchChannel());
+    if (videos.length === 0) {
       dispatch(fetchVideos(channelId));
     }
   }, []);

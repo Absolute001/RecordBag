@@ -55,7 +55,6 @@ export const fetchVideos = (channelId) => {
         type: "FETCH_VIDEOS",
         payload: JSON.parse(localStorage.getItem(channelId)),
       });
-      console.log(JSON.parse(localStorage.getItem(channelId)));
     } else {
       await axios
         .get(

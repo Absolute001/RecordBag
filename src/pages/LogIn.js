@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   emailLoginHandler,
@@ -9,17 +9,16 @@ import {
 import appFirebase from "../firebase/firebase";
 import { useHistory } from "react-router-dom";
 import { loadingHandler } from "../redux/fetch";
-import Loading from "../components/Loading";
 import { resetLogin } from "../redux/userLogIn";
-
 
 const LogIn = () => {
   const email = useSelector((state) => state.userLogInState.email);
   const password = useSelector((state) => state.userLogInState.password);
   const error = useSelector((state) => state.userLogInState.error);
-  const loading = useSelector((state) => state.globalState.loading);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  /* verifies the user credentials and then redirects to '/' */
 
   const handleLogIn = async (e) => {
     e.preventDefault();
@@ -27,7 +26,7 @@ const LogIn = () => {
       dispatch(loadingHandler(true));
       await appFirebase.auth().signInWithEmailAndPassword(email, password);
       dispatch(loadingHandler(false));
-      dispatch(resetLogin()); 
+      dispatch(resetLogin());
       history.push("/");
     } catch (error) {
       dispatch(loadingHandler(false));
@@ -35,13 +34,7 @@ const LogIn = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(loadingHandler(false));
-  }, []);
-
-  return loading ? (
-    <Loading />
-  ) : (
+  return (
     <section className="p-4 sm:p-24 max-w-screen-xl mx-auto flex">
       <div className="w-full">
         <div className=" mx-auto text-white bg-black lg:w-3/6">
@@ -72,7 +65,11 @@ const LogIn = () => {
                 className="border mb-8 text-sm p-2 text-black"
                 placeholder="kevinshallvari@yahoo.com"
                 value={email}
-                onChange={(e) => dispatch(emailLoginHandler(e.target.value.toLowerCase().trim()))}
+                onChange={(e) =>
+                  dispatch(
+                    emailLoginHandler(e.target.value.toLowerCase().trim())
+                  )
+                }
               />
               <label>Password:</label>
               <input

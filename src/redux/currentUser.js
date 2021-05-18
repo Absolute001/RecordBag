@@ -5,6 +5,8 @@ const currentUserState = {
   error: null,
 };
 
+/*HANDLING OF USER AND HIS COLLECTION */
+
 export const handleUser = (user) => {
   return { type: "HANDLE_USER", payload: user };
 };

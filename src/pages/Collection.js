@@ -16,6 +16,8 @@ const Collection = () => {
 
           <h1 className="text-xl font-bold p-2">{user.displayName}</h1>
 
+          {/*The next block renders the collection of the user */}
+
           <div className="flex flex-col md:grid grid-cols-2">
             {collection.reverse().map((record, index) => (
               <Link

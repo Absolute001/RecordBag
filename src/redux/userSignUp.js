@@ -6,6 +6,8 @@ const userState = {
   error: null,
 };
 
+/*THOSE ACTIONS HANDLES THE SIGN UP FORM */
+
 export const fnameHandler = (value) => {
   return { type: "FNAME_HANDLER", payload: value };
 };

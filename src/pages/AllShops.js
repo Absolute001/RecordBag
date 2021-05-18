@@ -20,6 +20,7 @@ const AllShops = (props) => {
         <h1 className="text-center text-white lg:text-6xl text-4xl pt-4 font-bold">
           SHOPS
         </h1>
+        {/* SHOP CAROUSEL */}
         <div className="lg:mb-16 p-8 xl:px-48 pb-16">
           <Slider className="md:w-3/6 mx-auto"{...settings}>
             {props.channels.map((channel, index) => (
