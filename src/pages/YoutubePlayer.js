@@ -22,7 +22,7 @@ const YoutubePlayer = () => {
     window.scrollTo(0, 0);
     if (playingVideo === "") {
       dispatch(fetchVideoFromParams(videoId));
-    } else if (playingVideo !== "") {
+    } else if (discogsRecord === null) {
       dispatch(fetchDiscogs(playingVideo.title));
     }
   }, [playingVideo]);

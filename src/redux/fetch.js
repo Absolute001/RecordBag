@@ -19,7 +19,6 @@ const discogsSecret = process.env.REACT_APP_DISCOGS_SECRET;
 /* FETCH FROM YOUTUBE THE CHANNELS RETURNING THE CHANNEL INFOS NEEDED TO RENDER THEM */
 export const fetchChannel = () => {
   return async (dispatch) => {
-    dispatch({ type: "LOADING_HANDLER", payload: true });
     try {
       const respFirestore = await appFirebase
         .firestore()
@@ -106,12 +105,11 @@ export const fetchDiscogs = (title) => {
     .split("")
     .filter((element) => element !== "[" && element !== "]")
     .join("");
-
   return async (dispatch) => {
     dispatch({ type: "LOADING_HANDLER", payload: true });
     await axios
       .get(
-        `${discogsBaseUrl}/database/search?${
+        `${discogsBaseUrl}database/search?${
           songTitle === ""
             ? `catno=${catNumber}&artist=${artist}`
             : `q=${artist}-${songTitle}`
@@ -127,12 +125,15 @@ export const fetchDiscogs = (title) => {
 
 export const fetchVideoFromParams = (videoId) => {
   return async (dispatch) => {
+    dispatch({ type: "LOADING_HANDLER", payload: true });
+
     await axios
       .get(
         ` https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`
       )
       .then(async (res) => {
         const item = res.data.items[0];
+        fetchDiscogs(item.snippet.title);
         dispatch({
           type: "FETCH_VIDEOS_FROM_PARAMS",
           payload: {
@@ -142,8 +143,8 @@ export const fetchVideoFromParams = (videoId) => {
             thumbnail: item.snippet.thumbnails.default.url,
           },
         });
-        dispatch({ type: "LOADING_HANDLER", payload: false });
       });
+    dispatch({ type: "LOADING_HANDLER", payload: false });
   };
 };
 
