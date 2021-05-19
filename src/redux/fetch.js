@@ -5,7 +5,7 @@ const globalState = {
   channel: [],
   shopVideos: [],
   playingVideo: "",
-  loading: true,
+  loading: false,
   discogsRes: null,
   error: "",
 };
@@ -19,6 +19,7 @@ const discogsSecret = process.env.REACT_APP_DISCOGS_SECRET;
 /* FETCH FROM YOUTUBE THE CHANNELS RETURNING THE CHANNEL INFOS NEEDED TO RENDER THEM */
 export const fetchChannel = () => {
   return async (dispatch) => {
+    dispatch({ type: "LOADING_HANDLER", payload: true });
     try {
       const respFirestore = await appFirebase
         .firestore()

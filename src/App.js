@@ -8,7 +8,6 @@ import Shop from "./pages/Shop";
 import Footer from "./components/Footer";
 import Collection from "./pages/Collection";
 import YoutubePlayer from "./pages/YoutubePlayer";
-import Hero from "./components/Hero";
 import Login from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import { handleUser, handleCollection } from "../src/redux/currentUser";
@@ -65,7 +64,6 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/">
-              <Hero />
               <AllShops channels={channels} />
             </Route>
             <Route path="/collection">

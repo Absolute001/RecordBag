@@ -11,24 +11,24 @@ const DiscogsResults = (props) => {
           alt="Record Cover"
         />
         <div className="flex flex-col w-full md:grid md:grid-cols-3 text-xl lg:text-2xl text-center items-center px-4">
-          <h1>
+          <h1 className="p-2">
             <span className="font-bold">Title:</span> {props.title}
           </h1>
-          <p>
+          <p className="p-2">
             <span className="font-bold">Country:</span> {props.country}
           </p>
-          <p>
+          <p className="p-2">
             <span className="font-bold">Year:</span> {props.year}
           </p>
-          <p>
+          <p className="p-2">
             <span className="font-bold">Format:</span>{" "}
             {props.format.map((element) => `${element} `)}
           </p>
-          <p>
+          <p className="p-2">
             <span className="font-bold">Label:</span>{" "}
             {props.label.map((element) => `${element} `)}
           </p>
-          <p>
+          <p className="p-2">
             <span className="font-bold">Genre:</span>{" "}
             {props.genre.map((element) => `${element} `)}
           </p>

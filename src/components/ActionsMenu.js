@@ -16,18 +16,14 @@ const ActionsMenu = () => {
   const clicked = useSelector((state) => state.utilState.clicked);
   const user = useSelector((state) => state.currentUser.user);
   const collection = useSelector((state) => state.currentUser.collection);
-  const isInCollection = collection.some((record) => record.video === videoId);
+  const isInCollection =
+    collection && collection.some((record) => record.video === videoId);
   const thumbnailUrl = useSelector(
     (state) => state.globalState.playingVideo.thumbnail
   );
   const recordTitle = useSelector(
     (state) => state.globalState.playingVideo.title
   );
-
-  /*   const collectionTrace = async () => {
-    const 
-    await docRef;
-  }; */
 
   const handleAddCollection = async () => {
     const db = appFirebase.firestore();
@@ -84,6 +80,7 @@ const ActionsMenu = () => {
       console.log(e);
     }
   };
+
   return (
     <nav className="flex p-4 text-6xl max-w-xs justify-center mx-auto my-auto">
       <img
