@@ -2,6 +2,7 @@ import React from "react";
 import Iframe from "react-iframe";
 import ActionsMenu from "../components/ActionsMenu";
 import { Link } from "react-router-dom";
+import CopyToClip from "../components/CopyToClip";
 
 const Player = (props) => {
   return (
@@ -25,21 +26,23 @@ const Player = (props) => {
             dangerouslySetInnerHTML={{ __html: props.description }}
           ></p>
         </div>
-
-        {props.isLogged ? (
-          <ActionsMenu />
-        ) : (
-          <h1 className="text-xl font-bold mx-auto mb-4">
-            <Link to="/signup" className="text-blue-500">
-              Sign Up
-            </Link>{" "}
-            or{" "}
-            <Link to="/login" className="text-blue-500">
-              Login
-            </Link>{" "}
-            to put this amazing record in your bag!
-          </h1>
-        )}
+        <nav className="flex p-4 text-6xl max-w-xs justify-center mx-auto my-auto">
+          {props.isLogged ? (
+            <ActionsMenu />
+          ) : (
+            <h1 className="text-xl font-bold mx-auto mb-4">
+              <Link to="/signup" className="text-blue-500">
+                Sign Up
+              </Link>{" "}
+              or{" "}
+              <Link to="/login" className="text-blue-500">
+                Login
+              </Link>{" "}
+              to put this amazing record in your bag!
+            </h1>
+          )}
+          <CopyToClip />
+        </nav>
       </div>
     </>
   );
