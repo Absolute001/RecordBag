@@ -1,5 +1,5 @@
 import React from "react";
-import ShopVideo from "../components/ShopVideo";
+import Records from "../components/Records";
 import "firebase/firestore";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ const Collection = () => {
 
   return (
     <section className="p-4 mb-4 lg:mb-24 min-h-screen max-w-screen-xl mx-auto">
-      {user && collection && (
+      {user !== null && collection.length !== 0 && (
         <div className="flex flex-col">
           {/* user account section */}
 
@@ -25,7 +25,7 @@ const Collection = () => {
                 key={record.video}
                 to={`/shop/${record.channel}/player/${record.video}`}
               >
-                <ShopVideo
+                <Records
                   channel={record.channel}
                   id={index}
                   videoId={record.video}
