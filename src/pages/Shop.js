@@ -7,7 +7,7 @@ import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import { useParams, Link } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import CollectionButton from "../components/CollectionButton";
-import ShopVideo from "../components/ShopVideo";
+import Records from "../components/Records";
 import Loading from "../components/Loading";
 
 const Shop = () => {
@@ -68,7 +68,7 @@ const Shop = () => {
               key={video.id.videoId}
               to={`/shop/${channelId}/player/${video.id.videoId}`}
             >
-              <ShopVideo
+              <Records
                 videoId={video.id.videoId}
                 key={index}
                 thumbnail={video.snippet.thumbnails.default.url}
