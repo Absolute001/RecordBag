@@ -30,7 +30,7 @@ const Player = (props) => {
           {props.isLogged ? (
             <ActionsMenu />
           ) : (
-            <h1 className="text-xl font-bold mx-auto mb-4">
+            <h1 className="text-xl font-bold mx-auto mb-4 mr-2">
               <Link to="/signup" className="text-blue-500">
                 Sign Up
               </Link>{" "}
