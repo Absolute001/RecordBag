@@ -6,7 +6,7 @@ import appFirebase from "../firebase/firebase";
 import { handleCollection } from "../redux/currentUser";
 import { useSelector, useDispatch } from "react-redux";
 import firebase from "firebase/app";
-import { clickHandler } from "../redux/utils";
+import { clickAddHandler, clickHotRecordHandler } from "../redux/utils";
 import { useParams } from "react-router-dom";
 
 const ActionsMenu = () => {
@@ -82,14 +82,19 @@ const ActionsMenu = () => {
   };
 
   return (
-    <nav className="flex p-4 text-6xl max-w-xs justify-center mx-auto my-auto">
+    <>
       <img
-        onClick={(e) => {
-          e.preventDefault();
+        onClick={() => {
+          dispatch(clickHotRecordHandler(true));
+          setTimeout(() => {
+            dispatch(clickHotRecordHandler(false));
+          }, 400);
           alert("This functionality is coming soon...");
         }}
         src={hotRecord}
-        className="my-auto w-12 h-12 mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 "
+        className={`my-auto w-12 h-12  mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
+          clicked.hotRecord && "animate animate-ping"
+        }`}
         alt="Tell other users that this record is hot"
       />
       <img
@@ -99,18 +104,18 @@ const ActionsMenu = () => {
           } else {
             handleAddCollection();
           }
-          dispatch(clickHandler(true));
+          dispatch(clickAddHandler(true));
           setTimeout(() => {
-            dispatch(clickHandler(false));
+            dispatch(clickAddHandler(false));
           }, 400);
         }}
         src={isInCollection ? inTheCollection : addToCollection}
-        className={`w-16 mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
-          clicked && "animate animate-ping"
+        className={`my-auto w-16  mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
+          clicked.add && "animate animate-ping"
         }`}
         alt="Add to your personal collection"
       />
-    </nav>
+    </>
   );
 };
 
