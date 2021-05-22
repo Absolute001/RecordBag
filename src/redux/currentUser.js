@@ -1,8 +1,7 @@
-
 const currentUserState = {
   user: null,
-  collection: null,
-  error: null,
+  collection: [],
+  error: "",
 };
 
 /*HANDLING OF USER AND HIS COLLECTION */
