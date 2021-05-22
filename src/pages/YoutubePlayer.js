@@ -43,7 +43,13 @@ const YoutubePlayer = () => {
         isLogged={currentUser}
       />
 
-      {discogsRecord && discogsRecord.results.length !== 0 ? (
+      {discogsRecord.length === 0 ? (
+        <div className="flex h-40 text-center">
+          <p className="my-auto mx-auto uppercase text-xl">
+            We can't find this beast we're sorry
+          </p>
+        </div>
+      ) : (
         <DiscogsResults
           cover={discogsRecord.results[0].cover_image}
           title={discogsRecord.results[0].title}
@@ -54,12 +60,6 @@ const YoutubePlayer = () => {
           genre={discogsRecord.results[0].genre}
           uri={discogsRecord.results[0].uri}
         />
-      ) : (
-        <div className="flex h-40 text-center">
-          <p className="my-auto mx-auto uppercase text-xl">
-            We can't find this beast we're sorry
-          </p>
-        </div>
       )}
     </section>
   );

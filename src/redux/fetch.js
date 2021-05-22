@@ -6,7 +6,7 @@ const globalState = {
   shopVideos: [],
   playingVideo: "",
   loading: false,
-  discogsRes: null,
+  discogsRes: [],
   error: "",
 };
 
@@ -39,7 +39,7 @@ export const fetchChannel = () => {
           );
       }
     } catch (e) {
-      console.log(e.message);
+      dispatch({ type: "HANDLE_ERROR", payload: e.message });
     }
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
@@ -64,7 +64,9 @@ export const fetchVideos = (channelId) => {
           localStorage.setItem(channelId, JSON.stringify(res.data));
           dispatch({ type: "FETCH_VIDEOS", payload: res.data });
         })
-        .catch((e) => e.message);
+        .catch((e) => {
+          dispatch({ type: "HANDLE_ERROR", payload: e.message });
+        });
     }
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
@@ -80,6 +82,9 @@ export const fetchPageHandler = (channelId, pageToken) => {
       )
       .then((res) => {
         dispatch({ type: "FETCH_VIDEOS", payload: res.data });
+      })
+      .catch((e) => {
+        dispatch({ type: "HANDLE_ERROR", payload: e.message });
       });
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
@@ -106,6 +111,7 @@ export const fetchDiscogs = (title) => {
     .split("")
     .filter((element) => element !== "[" && element !== "]")
     .join("");
+
   return async (dispatch) => {
     dispatch({ type: "LOADING_HANDLER", payload: true });
     await axios
@@ -117,7 +123,9 @@ export const fetchDiscogs = (title) => {
         }&type=release&key=${discogsKey}&secret=${discogsSecret}`
       )
       .then((res) => dispatch({ type: "FETCH_DISCOGS", payload: res.data }))
-      .catch((error) => dispatch({ type: "FETCH_DISCOGS", payload: error }));
+      .catch((e) => {
+        dispatch({ type: "HANDLE_ERROR", payload: e.message });
+      });
     dispatch({ type: "LOADING_HANDLER", payload: false });
   };
 };
@@ -176,6 +184,8 @@ const fetchReducer = (state = globalState, action) => {
       return { ...state, discogsRes: action.payload };
     case "FETCH_VIDEOS_FROM_PARAMS":
       return { ...state, playingVideo: action.payload };
+    case "HANDLE_ERROR":
+      return { ...state, error: action.payload };
     default:
       return state;
   }

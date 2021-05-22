@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import Hero from "../components/Hero";
 
 const AllShops = (props) => {
-  const settings = {
+  const carouselSettings = {
     dots: true,
     fade: true,
     infinite: true,
@@ -26,7 +26,7 @@ const AllShops = (props) => {
           </h1>
           {/* SHOP CAROUSEL */}
           <div className="lg:mb-16 p-8 xl:px-48 pb-16">
-            <Slider className="md:w-3/6 mx-auto" {...settings}>
+            <Slider className="md:w-3/6 mx-auto" {...carouselSettings}>
               {props.channels.map((channel, index) => (
                 <ShopThumbnail
                   key={index}
