@@ -9,7 +9,7 @@ import { fetchVideoFromParams, fetchDiscogs } from "../redux/fetch";
 import CollectionButton from "../components/CollectionButton";
 import Player from "../components/Player";
 
-const YoutubePlayer = () => {
+const SelectedRecord = () => {
   const playingVideo = useSelector((state) => state.globalState.playingVideo);
   const loading = useSelector((state) => state.globalState.loading);
   const discogsRecord = useSelector((state) => state.globalState.discogsRes);
@@ -67,4 +67,4 @@ const YoutubePlayer = () => {
   );
 };
 
-export default YoutubePlayer;
+export default SelectedRecord;
