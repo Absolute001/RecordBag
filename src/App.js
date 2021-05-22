@@ -7,7 +7,6 @@ import AllShops from "./pages/AllShops";
 import Shop from "./pages/Shop";
 import Footer from "./components/Footer";
 import Collection from "./pages/Collection";
-import YoutubePlayer from "./pages/YoutubePlayer";
 import Login from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import { handleUser, handleCollection } from "../src/redux/currentUser";
@@ -19,6 +18,7 @@ import {
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchChannel } from "../src/redux/fetch";
+import SelectedRecord from "./pages/SelectedRecord";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,6 @@ const App = () => {
     }
   }, []);
 
-
   return (
     <Router>
       {loading ? (
@@ -67,19 +66,19 @@ const App = () => {
               <AllShops channels={channels} />
             </Route>
             <Route path="/collection">
-              {currentUser !== null ? <Collection /> : <Redirect to="/login" />}
+              {currentUser ? <Collection /> : <Redirect to="/login" />}
             </Route>
             <Route exact path="/shop/:channelId">
               <Shop />
             </Route>
             <Route exact path="/shop/:channelId/player/:videoId">
-              <YoutubePlayer />
+              <SelectedRecord />
             </Route>
             <Route exact path="/login">
-              <Login />
+              {!currentUser ? <Login /> : <Redirect to="/collection" />}
             </Route>
             <Route exact path="/signup">
-              <SignUp />
+              {!currentUser ? <SignUp /> : <Redirect to="/collection" />}
             </Route>
           </Switch>
           <Footer />
