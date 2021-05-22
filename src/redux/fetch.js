@@ -123,7 +123,13 @@ export const fetchDiscogs = (title) => {
             : `q=${artist}-${songTitle}`
         }&type=release&key=${discogsKey}&secret=${discogsSecret}`
       )
-      .then((res) => dispatch({ type: "FETCH_DISCOGS", payload: res.data }))
+      .then((res) => {
+        if (res.data.results.length === 0) {
+          dispatch({ type: "FETCH_DISCOGS", payload: [] });
+        } else {
+          dispatch({ type: "FETCH_DISCOGS", payload: res.data });
+        }
+      })
       .catch((e) => {
         dispatch({ type: "HANDLE_ERROR", payload: e.message });
       });

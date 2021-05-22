@@ -22,10 +22,10 @@ const YoutubePlayer = () => {
     window.scrollTo(0, 0);
     if (playingVideo === "") {
       dispatch(fetchVideoFromParams(videoId));
-    } else if (discogsRecord === null) {
+    } else if (discogsRecord === []) {
       dispatch(fetchDiscogs(playingVideo.title));
     }
-  }, [playingVideo]);
+  }, []);
 
   return loading ? (
     <Loading />
@@ -36,14 +36,16 @@ const YoutubePlayer = () => {
         {currentUser && <CollectionButton path={`/collection`} />}
       </div>
 
-      <Player
-        playingVideo={playingVideo.videoId}
-        title={playingVideo.title}
-        description={playingVideo.description}
-        isLogged={currentUser}
-      />
+      {
+        <Player
+          playingVideo={playingVideo.videoId}
+          title={playingVideo.title}
+          description={playingVideo.description}
+          isLogged={currentUser}
+        />
+      }
 
-      {(discogsRecord.results.length === 0) | (discogsRecord.length === 0) ? (
+      {discogsRecord.length === 0 ? (
         <div className="flex h-40 text-center">
           <p className="my-auto mx-auto uppercase text-xl">
             We can't find this beast we're sorry
