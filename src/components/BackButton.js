@@ -5,7 +5,10 @@ import Record from "../components/img/vinyl.png";
 
 const BackButton = (props) => {
   return (
-    <button className="my-4 border-2 border-black lg:hover:bg-gray-600 lg:hover:text-white lg:transform transition-transform duration-500 lg:hover:-translate-y-2">
+    <button className="my-4 border-2 border-black 
+    lg:hover:bg-gray-600 lg:hover:text-white
+     lg:transform transition-transform 
+     duration-500 lg:hover:-translate-y-2">
       <Link to={props.path} className="flex p-2 items-end	uppercase">
         {props.path === "/" ? (
           <MdHome className="text-3xl mr-2" />
