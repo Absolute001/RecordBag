@@ -40,6 +40,7 @@ export const fetchChannel = () => {
           );
       }
     } catch (e) {
+      window.location.href = "/error";
       dispatch({ type: "HANDLE_ERROR", payload: e.message });
     }
     dispatch({ type: "LOADING_HANDLER", payload: false });
@@ -66,6 +67,7 @@ export const fetchVideos = (channelId) => {
           dispatch({ type: "FETCH_VIDEOS", payload: res.data });
         })
         .catch((e) => {
+          window.location.href = "/error";
           dispatch({ type: "HANDLE_ERROR", payload: e.message });
         });
     }
@@ -85,6 +87,7 @@ export const fetchPageHandler = (channelId, pageToken) => {
         dispatch({ type: "FETCH_VIDEOS", payload: res.data });
       })
       .catch((e) => {
+        window.location.href = "/error";
         dispatch({ type: "HANDLE_ERROR", payload: e.message });
       });
     dispatch({ type: "LOADING_HANDLER", payload: false });
@@ -131,6 +134,7 @@ export const fetchDiscogs = (title) => {
         }
       })
       .catch((e) => {
+        window.location.href = "/error";
         dispatch({ type: "HANDLE_ERROR", payload: e.message });
       });
     dispatch({ type: "LOADING_HANDLER", payload: false });
