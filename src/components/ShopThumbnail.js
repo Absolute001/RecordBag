@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchVideos, loadingHandler } from "../redux/fetch";
-import { pageFlagHandler } from "../redux/utils";
+import { pageFlagReset } from "../redux/utils";
 
 const ShopThumbnail = (props) => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const ShopThumbnail = (props) => {
       onClick={() => {
         window.scrollTo(0, 0);
         dispatch(loadingHandler());
-        dispatch(pageFlagHandler(0));
+        dispatch(pageFlagReset());
         dispatch(fetchVideos(props.channelId));
       }}
       className="text-center text-2xl font-bold"

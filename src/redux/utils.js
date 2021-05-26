@@ -19,6 +19,10 @@ export const pageFlagHandler = (num = 0) => {
   return { type: "PAGE_FLAG_HANDLER", payload: num };
 };
 
+export const pageFlagReset =()=>{
+  return { type: "PAGE_FLAG_RESET" };
+}
+
 const utilReducer = (state = utilState, action) => {
   switch (action.type) {
     case "CLICK_ADD_HANDLER":
@@ -40,6 +44,11 @@ const utilReducer = (state = utilState, action) => {
       return {
         ...state,
         pageFlag: state.pageFlag + action.payload,
+      };
+    case "PAGE_FLAG_RESET":
+      return {
+        ...state,
+        pageFlag: 1,
       };
     default:
       return state;
