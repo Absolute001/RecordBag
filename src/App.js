@@ -9,6 +9,8 @@ import Footer from "./components/Footer";
 import Collection from "./pages/Collection";
 import Login from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
+import SelectedRecord from "./pages/SelectedRecord";
+import { ErrorPage } from "./pages/ErrorPage";
 import { handleUser, handleCollection } from "../src/redux/currentUser";
 import {
   BrowserRouter as Router,
@@ -17,15 +19,11 @@ import {
   Switch,
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchChannel } from "../src/redux/fetch";
-import SelectedRecord from "./pages/SelectedRecord";
 
 const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.user);
   const loading = useSelector((state) => state.globalState.loading);
-  const channels = useSelector((state) => state.globalState.channel);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     if (currentUser === null) {
@@ -48,42 +46,37 @@ const App = () => {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    if (channels.length === 0) {
-      dispatch(fetchChannel());
-    }
-  }, []);
-
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <Router>
-      {loading ? (
-        <Loading />
-      ) : (
-        <main>
-          <Navbar />
-          <Switch>
-            <Route exact path="/">
-              <AllShops channels={channels} />
-            </Route>
-            <Route path="/collection">
-              {currentUser ? <Collection /> : <Redirect to="/login" />}
-            </Route>
-            <Route exact path="/shop/:channelId">
-              <Shop />
-            </Route>
-            <Route exact path="/shop/:channelId/player/:videoId">
-              <SelectedRecord />
-            </Route>
-            <Route exact path="/login">
-              {!currentUser ? <Login /> : <Redirect to="/collection" />}
-            </Route>
-            <Route exact path="/signup">
-              {!currentUser ? <SignUp /> : <Redirect to="/collection" />}
-            </Route>
-          </Switch>
-          <Footer />
-        </main>
-      )}
+      <main>
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <AllShops />
+          </Route>
+          <Route path="/collection">
+            {currentUser ? <Collection /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/shop/:channelId">
+            <Shop />
+          </Route>
+          <Route exact path="/shop/:channelId/player/:videoId">
+            <SelectedRecord />
+          </Route>
+          <Route path="/login">
+            {!currentUser ? <Login /> : <Redirect to="/collection" />}
+          </Route>
+          <Route path="/signup">
+            {!currentUser ? <SignUp /> : <Redirect to="/collection" />}
+          </Route>
+          <Route exact path="/error">
+            <ErrorPage />
+          </Route>
+        </Switch>
+        <Footer />
+      </main>
     </Router>
   );
 };

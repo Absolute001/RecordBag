@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect } from "react";
 import ShopThumbnail from "../components/ShopThumbnail";
 import Slider from "react-slick";
 import Hero from "../components/Hero";
+import { fetchChannel } from "../redux/fetch";
+import { useSelector, useDispatch } from "react-redux";
 
-const AllShops = (props) => {
+const AllShops = () => {
   const carouselSettings = {
     dots: true,
     fade: true,
@@ -15,6 +17,13 @@ const AllShops = (props) => {
     autoplay: true,
     lazyLoad: true,
   };
+  const dispatch = useDispatch();
+  const channels = useSelector((state) => state.globalState.channel);
+  useEffect(() => {
+    if (channels.length === 0) {
+      dispatch(fetchChannel());
+    }
+  }, []);
 
   return (
     <>
@@ -27,7 +36,7 @@ const AllShops = (props) => {
           {/* SHOP CAROUSEL */}
           <div className="lg:mb-16 p-8 xl:px-48 pb-16">
             <Slider className="md:w-3/6 mx-auto" {...carouselSettings}>
-              {props.channels.map((channel, index) => (
+              {channels.map((channel, index) => (
                 <ShopThumbnail
                   key={index}
                   channelId={channel.id}
