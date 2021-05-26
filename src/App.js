@@ -38,7 +38,7 @@ const App = () => {
       docRef.get().then((doc) => {
         if (doc.exists) {
           const data = doc.data();
-          dispatch(handleCollection(data.likedRecords.reverse()));
+          dispatch(handleCollection(data.likedRecords));
         } else {
           console.log("No such document!");
         }

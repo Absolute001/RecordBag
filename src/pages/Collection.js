@@ -23,21 +23,23 @@ const Collection = () => {
 
           {collection.length !== 0 ? (
             <div className="flex flex-col md:grid grid-cols-2">
-              {collection.reverse().map((record, index) => (
-                <Link
-                  className="md:mx-2 my-4"
-                  key={record.video}
-                  to={`/shop/${record.channel}/player/${record.video}`}
-                >
-                  <Records
-                    channel={record.channel}
-                    id={index}
-                    videoId={record.video}
-                    title={record.title}
-                    thumbnail={record.thumbnail}
-                  />
-                </Link>
-              ))}
+              {collection
+                .map((record, index) => (
+                  <Link
+                    className="md:mx-2 my-4"
+                    key={record.video}
+                    to={`/shop/${record.channel}/player/${record.video}`}
+                  >
+                    <Records
+                      channel={record.channel}
+                      id={index}
+                      videoId={record.video}
+                      title={record.title}
+                      thumbnail={record.thumbnail}
+                    />
+                  </Link>
+                ))
+                .reverse()}
             </div>
           ) : (
             <div className="min-h-screen flex flex-col justify-center">
@@ -45,7 +47,7 @@ const Collection = () => {
                 It seems your bag is still EMPTY! Let's dig some good record!
               </h1>
               <div className="mx-auto flex">
-              <BackButton path="/" />
+                <BackButton path="/" />
               </div>
             </div>
           )}
