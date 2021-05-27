@@ -17,7 +17,7 @@ const CopyToClip = () => {
             dispatch(clickClipboardHandler(false));
           }, 400);
         }}
-        className={`w-12 h-12 text-center mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
+        className={`w-12 h-12 text-center mx-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
           clicked.clipboard && "animate animate-ping"
         }`}
       >

@@ -4,7 +4,7 @@ const ActionsButton = (props) => {
   return (
     <button
       onClick={props.onClick}
-      className={`mr-4 outline-none
+      className={`mx-4 outline-none
        lg:transform transition-transform 
       duration-500 focus:outline-none lg:hover:-translate-y-2
         ${props.clicked && "animate animate-ping"}`}

@@ -26,7 +26,7 @@ const Player = (props) => {
             dangerouslySetInnerHTML={{ __html: props.description }}
           ></p>
         </div>
-        <nav className="flex p-4 text-6xl max-w-xs justify-center mx-auto my-auto">
+        <nav className="flex max-w-xs mx-auto my-auto border-black">
           {props.isLogged ? (
             <RecordActionList />
           ) : (
