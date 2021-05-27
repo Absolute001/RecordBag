@@ -1,8 +1,8 @@
 import React from "react";
 import Iframe from "react-iframe";
-import ActionsMenu from "../components/ActionsMenu";
 import { Link } from "react-router-dom";
 import CopyToClip from "../components/CopyToClip";
+import RecordActionList from "../container/RecordActionList";
 
 const Player = (props) => {
   return (
@@ -28,7 +28,7 @@ const Player = (props) => {
         </div>
         <nav className="flex p-4 text-6xl max-w-xs justify-center mx-auto my-auto">
           {props.isLogged ? (
-            <ActionsMenu />
+            <RecordActionList />
           ) : (
             <h1 className="text-xl font-bold mx-auto mb-4 mr-2">
               <Link to="/signup" className="text-blue-500">

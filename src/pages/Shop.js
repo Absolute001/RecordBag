@@ -5,10 +5,11 @@ import { fetchChannel, fetchPageHandler, fetchVideos } from "../redux/fetch";
 import { pageFlagHandler } from "../redux/utils";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import { useParams, Link } from "react-router-dom";
-import BackButton from "../components/BackButton";
-import CollectionButton from "../components/CollectionButton";
+import HomeIcon from "../components/img/home icon.png";
+import Bag from "../components/img/Logo.png";
 import Records from "../components/Records";
 import Loading from "../components/Loading";
+import NavButton from "../components/NavButton";
 
 const Shop = () => {
   const { channelId } = useParams();
@@ -34,8 +35,12 @@ const Shop = () => {
     <section className="p-4 max-w-screen-xl mx-auto min-h-screen">
       {/*  BACK BUTTON */}
 
-      <BackButton path="/" />
-      {currentUser && <CollectionButton path={`/collection`} />}
+      <div className="flex justify-items-start">
+        <NavButton path="/" role="HOME" icon={HomeIcon} />
+        {currentUser && (
+          <NavButton role="COLLECTION" icon={Bag} path={`/collection`} />
+        )}
+      </div>
 
       <div className="bg-black w-full h-32 sm:h-48 flex mb-4">
         <div className="h-full flex mx-auto sm:mx-0 sm:ml-8 p-4">

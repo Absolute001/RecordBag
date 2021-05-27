@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../components/Loading";
 import { useParams } from "react-router-dom";
-import BackButton from "../components/BackButton";
 import DiscogsResults from "../components/DiscogsResults";
 import { fetchVideoFromParams, fetchDiscogs } from "../redux/fetch";
-import CollectionButton from "../components/CollectionButton";
 import Player from "../components/Player";
+import Bag from "../components/img/Logo.png";
+import NavButton from "../components/NavButton";
+import Vynil from "../components/img/vinyl.png";
 
 const SelectedRecord = () => {
   const playingVideo = useSelector((state) => state.globalState.playingVideo);
@@ -31,9 +32,11 @@ const SelectedRecord = () => {
     <Loading />
   ) : (
     <section className="max-w-screen-xl min-h-screen mx-auto p-4 h-auto">
-      <div>
-        <BackButton path={`/shop/${channelId}`} />
-        {currentUser && <CollectionButton path={`/collection`} />}
+      <div className="flex justify-items-start">
+        <NavButton path={`/shop/${channelId}`} role="SHOP" icon={Vynil} />
+        {currentUser && (
+          <NavButton role="COLLECTION" icon={Bag} path={`/collection`} />
+        )}
       </div>
 
       {

@@ -3,7 +3,8 @@ import Records from "../components/Records";
 import "firebase/firestore";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import BackButton from "../components/BackButton";
+import HomeIcon from "../components/img/home icon.png";
+import NavButton from "../components/NavButton";
 
 const Collection = () => {
   const collection = useSelector((state) => state.currentUser.collection);
@@ -47,7 +48,7 @@ const Collection = () => {
                 It seems your bag is still EMPTY! Let's dig some good record!
               </h1>
               <div className="mx-auto flex">
-                <BackButton path="/" />
+                <NavButton path="/" role="HOME" icon={HomeIcon} />
               </div>
             </div>
           )}
