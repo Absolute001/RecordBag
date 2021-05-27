@@ -2,7 +2,7 @@ import React from "react";
 import { clickClipboardHandler } from "../redux/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { BsClipboard } from "react-icons/bs";
+import { BsLink45Deg } from "react-icons/bs";
 
 const CopyToClip = () => {
   const clicked = useSelector((state) => state.utilState.clicked);
@@ -17,11 +17,12 @@ const CopyToClip = () => {
             dispatch(clickClipboardHandler(false));
           }, 400);
         }}
-        className={`my-auto w-12 h-12  mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
+        className={`w-12 h-12 text-center mr-4 cursor-pointer lg:transform transition-transform duration-500 lg:hover:-translate-y-2 rounded-full ${
           clicked.clipboard && "animate animate-ping"
         }`}
       >
-        <BsClipboard className="text-5xl" />
+        <BsLink45Deg className="text-5xl" />
+        <h1 className="text-sm p-2">Copy </h1>
       </span>
     </CopyToClipboard>
   );
