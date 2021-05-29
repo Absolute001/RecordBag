@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import userSignUpReducer from "./userSignUp";
 import userLogInReducer from "./userLogIn";
 import handleUserReducer from "./currentUser";
+import hotRecordsReducer from "./hotRecords";
 import utilReducer from "./utils";
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   userLogInState: userLogInReducer,
   currentUser: handleUserReducer,
   utilState: utilReducer,
+  hotRecordsState: hotRecordsReducer,
 });
 
 const store = createStore(
