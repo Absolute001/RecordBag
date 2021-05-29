@@ -21,6 +21,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
+  const channels = useSelector((state) => state.globalState.channel);
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.user);
   const loading = useSelector((state) => state.globalState.loading);
@@ -54,7 +55,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/">
-            <AllShops />
+            <AllShops channels={channels} />
           </Route>
           <Route path="/collection">
             {currentUser ? <Collection /> : <Redirect to="/login" />}
