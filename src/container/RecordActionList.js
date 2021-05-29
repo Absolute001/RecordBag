@@ -1,16 +1,15 @@
 import React from "react";
-import hotRecord from "../components/img/hotRecord.png";
 import addToCollection from "../components/img/addToCollection.png";
 import inTheCollection from "../components/img/inTheCollection.png";
 import appFirebase from "../firebase/firebase";
 import { handleCollection } from "../redux/currentUser";
 import { useSelector, useDispatch } from "react-redux";
 import firebase from "firebase/app";
-import { clickAddHandler, clickHotRecordHandler } from "../redux/utils";
+import { clickHandler } from "../redux/utils";
 import { useParams } from "react-router-dom";
 import ActionsButton from "../components/ActionsButton";
 
-const RecordActionList = () => {
+const RecordActionList = (props) => {
   const { videoId } = useParams();
   const { channelId } = useParams();
   const dispatch = useDispatch();
@@ -26,76 +25,83 @@ const RecordActionList = () => {
     (state) => state.globalState.playingVideo.title
   );
 
-  const handleAddCollection = async () => {
+  const handleAddRemove = async (action) => {
     const db = appFirebase.firestore();
     const docRef = db.collection("users").doc(user.email);
-    try {
-      await db
-        .collection("users")
-        .doc(user.email)
-        .update({
-          likedRecords: firebase.firestore.FieldValue.arrayUnion({
-            channel: channelId,
-            video: videoId,
-            thumbnail: thumbnailUrl,
-            title: recordTitle,
-          }),
+    const hotRecRef = db.collection("hotRecords").doc(videoId);
+    if (action === "add") {
+      try {
+        await db
+          .collection("users")
+          .doc(user.email)
+          .update({
+            likedRecords: firebase.firestore.FieldValue.arrayUnion({
+              channel: channelId,
+              video: videoId,
+              thumbnail: thumbnailUrl,
+              title: recordTitle,
+            }),
+          });
+        await docRef.get().then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            dispatch(handleCollection(data.likedRecords));
+            console.log(collection);
+          }
         });
-      await docRef.get().then((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          dispatch(handleCollection(data.likedRecords));
-          console.log(collection);
-        }
-      });
-      console.log("add");
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const handleRemoveCollection = async () => {
-    const db = appFirebase.firestore();
-    const docRef = db.collection("users").doc(user.email);
-    try {
-      await db
-        .collection("users")
-        .doc(user.email)
-        .update({
-          likedRecords: firebase.firestore.FieldValue.arrayRemove({
-            channel: channelId,
-            video: videoId,
-            thumbnail: thumbnailUrl,
-            title: recordTitle,
-          }),
+        await hotRecRef.get().then((doc) => {
+          if (!doc.exists) {
+            hotRecRef.set({
+              channel: channelId,
+              video: videoId,
+              thumbnail: thumbnailUrl,
+              title: recordTitle,
+              likes: 1,
+              description: props.description,
+            });
+          } else {
+            hotRecRef.update({
+              likes: firebase.firestore.FieldValue.increment(1),
+            });
+          }
         });
-      await docRef.get().then((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          dispatch(handleCollection(data.likedRecords));
-          console.log(collection);
-        }
-      });
-      console.log("remove");
-    } catch (e) {
-      console.log(e);
+      } catch (e) {
+        console.log(e);
+      }
+    } else if (action === "remove") {
+      try {
+        await db
+          .collection("users")
+          .doc(user.email)
+          .update({
+            likedRecords: firebase.firestore.FieldValue.arrayRemove({
+              channel: channelId,
+              video: videoId,
+              thumbnail: thumbnailUrl,
+              title: recordTitle,
+            }),
+          });
+        await docRef.get().then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            dispatch(handleCollection(data.likedRecords));
+            console.log(collection);
+          }
+        });
+        await hotRecRef.get().then((doc) => {
+          hotRecRef.update({
+            likes: firebase.firestore.FieldValue.increment(-1),
+          });
+        });
+        console.log("remove");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
   return (
     <>
-      <ActionsButton
-        icon={hotRecord}
-        alt="Tell other users this record is hot"
-        clicked={clicked.hotRecord}
-        role="Hot!"
-        onClick={(event) => {
-          dispatch(clickHotRecordHandler(true));
-          setTimeout(() => {
-            dispatch(clickHotRecordHandler(false));
-          }, 400);
-        }}
-      />
       <ActionsButton
         icon={isInCollection ? inTheCollection : addToCollection}
         alt="Add To Your Collection"
@@ -103,13 +109,13 @@ const RecordActionList = () => {
         clicked={clicked.add}
         onClick={(event) => {
           if (isInCollection) {
-            handleRemoveCollection();
+            handleAddRemove("remove");
           } else {
-            handleAddCollection();
+            handleAddRemove("add");
           }
-          dispatch(clickAddHandler(true));
+          dispatch(clickHandler(true));
           setTimeout(() => {
-            dispatch(clickAddHandler(false));
+            dispatch(clickHandler(false));
           }, 400);
         }}
       />
