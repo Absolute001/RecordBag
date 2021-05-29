@@ -28,7 +28,7 @@ const Player = (props) => {
         </div>
         <nav className="flex max-w-xs mx-auto my-auto border-black">
           {props.isLogged ? (
-            <RecordActionList />
+            <RecordActionList description={props.description} />
           ) : (
             <h1 className="text-xl font-bold mx-auto mb-4 mr-2">
               <Link to="/signup" className="text-blue-500">
