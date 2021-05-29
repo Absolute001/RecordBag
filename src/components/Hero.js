@@ -15,14 +15,15 @@ const Hero = () => {
           </h2>
         </div>
       </div>
-      <div className="bg-black text-gray-50 mt-4 lg:mt-0 p-4 text-xl sm:text-2xl lg:text-3xl">
+      <div className="bg-black text-gray-50 mt-4 lg:mt-0 p-4 text-2xl leading-9 sm:text-2xl lg:text-3xl">
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi
-          quas, a repudiandae nulla magni magnam eveniet itaque distinctio
-          exercitationem sed quo minima aliquam expedita? Aliquam accusantium ex
-          magnam nulla vero saepe voluptatibus aut expedita vel quod! Enim odit,
-          totam, itaque at qui, nostrum deleniti praesentium beatae ut
-          voluptatibus consequatur fuga.
+          Welcome to RecordBag, where all your favourite records live! It
+          doesn't matter if you're a professional deejay or just an amateur disk
+          jokey, RecordBag is a perfect tool for whoever loves music and just
+          what you need to start creating your own digital library!
+          Incorporating features from Youtube and Discogs, RecordBag is the
+          perfect place to create your new set, explore new hot records and find
+          the cheapest offer on that record you've been looking for all along.
         </p>
       </div>
     </section>
