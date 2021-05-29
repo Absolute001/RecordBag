@@ -1,5 +1,5 @@
-import axios from "axios";
 import appFirebase from "../firebase/firebase";
+import { youtube, discogs } from "../const/entrypoints";
 
 const globalState = {
   channel: [],
@@ -10,8 +10,6 @@ const globalState = {
   error: "",
 };
 
-const baseUrl = "https://youtube.googleapis.com/youtube/v3/";
-const discogsBaseUrl = "https://api.discogs.com/";
 const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
 const discogsKey = process.env.REACT_APP_DISCOGS_KEY;
 const discogsSecret = process.env.REACT_APP_DISCOGS_SECRET;
@@ -26,19 +24,10 @@ export const fetchChannel = () => {
         .firestore()
         .collection("shops")
         .get();
-      for (let i = 0; i < respFirestore.docs.length; i++) {
-        await appFirebase
-          .firestore()
-          .collection("shops")
-          .doc(respFirestore.docs[i].id)
-          .get()
-          .then((doc) =>
-            dispatch({
-              type: "FETCH_CHANNEL",
-              payload: doc.data(),
-            })
-          );
-      }
+      dispatch({
+        type: "FETCH_CHANNEL",
+        payload: respFirestore.docs.map((doc) => doc.data()),
+      });
     } catch (e) {
       window.location.href = "/error";
       dispatch({ type: "HANDLE_ERROR", payload: e.message });
@@ -58,9 +47,9 @@ export const fetchVideos = (channelId) => {
         payload: JSON.parse(localStorage.getItem(channelId)),
       });
     } else {
-      await axios
+      await youtube
         .get(
-          `${baseUrl}search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=50&key=${apiKey}`
+          `search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=50&key=${apiKey}`
         )
         .then((res) => {
           localStorage.setItem(channelId, JSON.stringify(res.data));
@@ -79,9 +68,9 @@ export const fetchVideos = (channelId) => {
 export const fetchPageHandler = (channelId, pageToken) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING_HANDLER", payload: true });
-    await axios
+    await youtube
       .get(
-        `${baseUrl}search?part=snippet&channelId=${channelId}&order=date&type=video&&pageToken=${pageToken}&maxResults=50&key=${apiKey}`
+        `search?part=snippet&channelId=${channelId}&order=date&type=video&&pageToken=${pageToken}&maxResults=50&key=${apiKey}`
       )
       .then((res) => {
         dispatch({ type: "FETCH_VIDEOS", payload: res.data });
@@ -118,9 +107,9 @@ export const fetchDiscogs = (title) => {
 
   return async (dispatch) => {
     dispatch({ type: "LOADING_HANDLER", payload: true });
-    await axios
+    await discogs
       .get(
-        `${discogsBaseUrl}database/search?${
+        `database/search?${
           songTitle === ""
             ? `catno=${catNumber}&artist=${artist}`
             : `q=${artist}-${songTitle}`
@@ -147,10 +136,8 @@ export const fetchVideoFromParams = (videoId) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING_HANDLER", payload: true });
 
-    await axios
-      .get(
-        ` https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`
-      )
+    await youtube
+      .get(`videos?part=snippet&id=${videoId}&key=${apiKey}`)
       .then(async (res) => {
         const item = res.data.items[0];
         fetchDiscogs(item.snippet.title);
@@ -185,7 +172,7 @@ const fetchReducer = (state = globalState, action) => {
     case "FETCH_CHANNEL":
       return {
         ...state,
-        channel: [...state.channel, action.payload],
+        channel: action.payload,
       };
     case "FETCH_VIDEOS":
       return { ...state, shopVideos: [action.payload] };
