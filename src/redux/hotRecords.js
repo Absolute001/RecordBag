@@ -11,7 +11,10 @@ export const fetchHotRecords = () => {
       const respFirestore = await appFirebase
         .firestore()
         .collection("hotRecords")
+        .orderBy("likes", "desc")
+        .limit(10)
         .get();
+      console.log(respFirestore);
       dispatch({
         type: "FETCH_HOT_RECORDS",
         payload: respFirestore.docs.map((doc) => doc.data()),

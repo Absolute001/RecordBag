@@ -7,7 +7,6 @@ import Records from "../components/Records";
 
 const HotRecordsContainer = () => {
   const hotRecords = useSelector((state) => state.hotRecordsState.hotRecords);
-  const hottestRecords = hotRecords.sort((a, b) => b.likes - a.likes);
   const dispatch = useDispatch();
   useEffect(() => {
     if (hotRecords.length === 0) {
@@ -25,24 +24,21 @@ const HotRecordsContainer = () => {
         <span className="text-lg"> - Users' Top 10 </span>
       </h1>
       <div className="flex flex-col sm:grid grid-cols-2 mt-2">
-        {hottestRecords.map(
-          (record, index) =>
-            index < 10 && (
-              <Link
-                className="mx-2 my-4"
-                key={record.video}
-                to={`/shop/${record.channel}/player/${record.video}`}
-              >
-                <Records
-                  videoId={record.video}
-                  key={index}
-                  thumbnail={record.thumbnail}
-                  title={record.title}
-                  description={record.description}
-                />
-              </Link>
-            )
-        )}
+        {hotRecords.map((record, index) => (
+          <Link
+            className="mx-2 my-4"
+            key={record.video}
+            to={`/shop/${record.channel}/player/${record.video}`}
+          >
+            <Records
+              videoId={record.video}
+              key={index}
+              thumbnail={record.thumbnail}
+              title={record.title}
+              description={record.description}
+            />
+          </Link>
+        ))}
       </div>
     </section>
   );
