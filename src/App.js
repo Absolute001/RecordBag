@@ -10,7 +10,8 @@ import Collection from "./pages/Collection";
 import Login from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import SelectedRecord from "./pages/SelectedRecord";
-import { ErrorPage } from "./pages/ErrorPage";
+import ErrorPage from "./pages/ErrorPage";
+import * as ROUTES from "./const/routes";
 import { handleUser, handleCollection } from "../src/redux/currentUser";
 import {
   BrowserRouter as Router,
@@ -51,33 +52,31 @@ const App = () => {
     <Loading />
   ) : (
     <Router>
-      <main>
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <AllShops channels={channels} />
-          </Route>
-          <Route path="/collection">
-            {currentUser ? <Collection /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/shop/:channelId">
-            <Shop />
-          </Route>
-          <Route exact path="/shop/:channelId/player/:videoId">
-            <SelectedRecord />
-          </Route>
-          <Route path="/login">
-            {!currentUser ? <Login /> : <Redirect to="/collection" />}
-          </Route>
-          <Route path="/signup">
-            {!currentUser ? <SignUp /> : <Redirect to="/collection" />}
-          </Route>
-          <Route exact path="/error">
-            <ErrorPage />
-          </Route>
-        </Switch>
-        <Footer />
-      </main>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <AllShops channels={channels} />
+        </Route>
+        <Route path={ROUTES.collection}>
+          {currentUser ? <Collection /> : <Redirect to={ROUTES.login} />}
+        </Route>
+        <Route exact path={ROUTES.shop}>
+          <Shop />
+        </Route>
+        <Route exact path={ROUTES.selectedRecord}>
+          <SelectedRecord />
+        </Route>
+        <Route path={ROUTES.login}>
+          {!currentUser ? <Login /> : <Redirect to={ROUTES.collection} />}
+        </Route>
+        <Route path={ROUTES.signup}>
+          {!currentUser ? <SignUp /> : <Redirect to={ROUTES.collection} />}
+        </Route>
+        <Route exact path={ROUTES.error}>
+          <ErrorPage />
+        </Route>
+      </Switch>
+      <Footer />
     </Router>
   );
 };
