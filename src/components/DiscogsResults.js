@@ -2,15 +2,15 @@ import React from "react";
 
 const DiscogsResults = (props) => {
   return (
-    <div className="flex flex-col">
+    <article className="flex flex-col">
       <h1 className="text-4xl my-12"> Here you can find this hottie:</h1>
-      <div className="flex flex-col md:flex-row border-black border-2 p-4 mb-12">
+      <figure className="flex flex-col md:flex-row border-black border-2 p-4 mb-12">
         <img
           className="w-40 h-40 clip-path mx-auto"
           src={props.cover}
           alt="Record Cover"
         />
-        <div className="flex flex-col w-full md:grid md:grid-cols-3 text-xl lg:text-2xl text-center items-center px-4">
+        <figcaption className="flex flex-col w-full md:grid md:grid-cols-3 text-xl lg:text-2xl text-center items-center px-4">
           <h1 className="p-2">
             <span className="font-bold">Title:</span> {props.title}
           </h1>
@@ -40,9 +40,9 @@ const DiscogsResults = (props) => {
           >
             Buy Here
           </a>
-        </div>
-      </div>
-    </div>
+        </figcaption>
+      </figure>
+    </article>
   );
 };
 

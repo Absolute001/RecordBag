@@ -3,13 +3,13 @@ import Illuminati from "../components/img/illuminati.png";
 
 export const ErrorPage = () => {
   return (
-    <section className="flex flex-col p-4 mb-4 lg:mb-24 min-h-screen max-w-screen-xl mx-auto">
+    <article className="flex flex-col p-4 mb-4 lg:mb-24 min-h-screen max-w-screen-xl mx-auto">
       <div className="flex flex-col my-auto">
-        <picture className=" mb-8 w-full">
+        <picture className="mb-8 w-full ">
           <img src={Illuminati} alt="error logo" className="mx-auto w-2/6" />
         </picture>
-        <h1 className="text-6xl text-center mb-8">ERROR!</h1>
-        <div className="flex flex-col text-2xl text-center">
+        <section className="flex flex-col text-2xl text-center">
+          <h1 className="text-6xl mb-8">ERROR!</h1>
           <q className="w-5/6 mx-auto">
             Please do not be alarmed, remain calm. Do not attempt to leave the
             dancefloor. The DJ booth is conducting a troubleshoot test of the
@@ -24,18 +24,19 @@ export const ErrorPage = () => {
             you updated on our current status. We repeat, this is only a test,
             this is only a test.
           </q>
-          <a
-            href="https://www.youtube.com/watch?v=rb4-oOKIZQ8&ab_channel=P%C3%A9terSz%C3%BCtsP%C3%A9terSz%C3%BCts"
-            target="_blank"
-            rel="noreferrer"
+
+          <button
+            onClick={(e) => {
+              window.open("https://youtu.be/rb4-oOKIZQ8?t=21", "_blank");
+              window.location.href = "/";
+            }}
+            className="text-white border-black font-bold border-4 mt-8 p-4 mx-auto bg-red-600 animate-pulse"
           >
-            <button className="text-white border-black font-bold border-4 mt-8 p-4 mx-auto bg-red-600 animate-pulse">
-              PANIC BUTTON
-            </button>
-          </a>
-        </div>
+            PANIC BUTTON
+          </button>
+        </section>
       </div>
-    </section>
+    </article>
   );
 };
 

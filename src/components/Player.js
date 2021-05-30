@@ -7,16 +7,16 @@ import RecordActionList from "../container/RecordActionList";
 const Player = (props) => {
   return (
     <>
-      <div className="w-full bg-black">
+      <section className="w-full bg-black">
         <Iframe
           url={`https://www.youtube.com/embed/${props.playingVideo}?rel=0`}
           className="my-4 w-full h-72 sm:h-96 mx-auto"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
-      </div>
+      </section>
       <div className="border-b border-black flex flex-col lg:flex-row">
-        <div className="flex flex-col lg:w-4/6">
+        <section className="flex flex-col lg:w-4/6">
           <h1
             className="text-4xl font-bold"
             dangerouslySetInnerHTML={{ __html: props.title }}
@@ -25,8 +25,8 @@ const Player = (props) => {
             className="my-8 text-xl"
             dangerouslySetInnerHTML={{ __html: props.description }}
           ></p>
-        </div>
-        <nav className="flex max-w-xs mx-auto my-auto border-black">
+        </section>
+        <nav className="flex max-w-xs mx-auto my-auto pb-4 border-black">
           {props.isLogged ? (
             <RecordActionList description={props.description} />
           ) : (

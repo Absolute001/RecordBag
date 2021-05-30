@@ -18,17 +18,20 @@ const Records = (props) => {
   };
 
   return (
-    <div
+    <article
       className="h-full border-2 border-black py-2 text-black lg:hover:bg-gray-600 
     lg:hover:text-white lg:transform transition-transform duration-500 lg:hover:-translate-y-2"
     >
-      <div className="max-w-full my-auto flex" onClick={() => dispatchChain()}>
+      <figure
+        className="max-w-full my-auto flex"
+        onClick={() => dispatchChain()}
+      >
         <img
           src={props.thumbnail}
           alt="video thumbnail"
           className="clip-path"
         />
-        <span
+        <figcaption
           className=" max-h-full w-3/6 my-auto text-lg lg:text-2xl"
           dangerouslySetInnerHTML={{
             __html:
@@ -36,9 +39,9 @@ const Records = (props) => {
                 ? `${props.title.substring(0, 30)}...`
                 : props.title,
           }}
-        ></span>
-      </div>
-    </div>
+        ></figcaption>
+      </figure>
+    </article>
   );
 };
 

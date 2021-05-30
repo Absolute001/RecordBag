@@ -32,12 +32,12 @@ const SelectedRecord = () => {
     <Loading />
   ) : (
     <section className="max-w-screen-xl min-h-screen mx-auto p-4 h-auto">
-      <div className="flex justify-items-start">
+      <nav className="flex justify-items-start">
         <NavButton path={`/shop/${channelId}`} role="SHOP" icon={Vynil} />
         {currentUser && (
           <NavButton role="COLLECTION" icon={Bag} path={`/collection`} />
         )}
-      </div>
+      </nav>
 
       {
         <Player

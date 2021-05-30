@@ -11,7 +11,7 @@ const Collection = () => {
   const user = useSelector((state) => state.currentUser.user);
 
   return (
-    <section className="p-4 mb-4 lg:mb-24 min-h-screen max-w-screen-xl mx-auto">
+    <article className="p-4 mb-4 lg:mb-24 min-h-screen max-w-screen-xl mx-auto">
       {user !== null && (
         <div className="flex flex-col">
           {/* user account section */}
@@ -23,7 +23,7 @@ const Collection = () => {
           {/*The next block renders the collection of the user */}
 
           {collection.length !== 0 ? (
-            <div className="flex flex-col md:grid grid-cols-2">
+            <section className="flex flex-col md:grid grid-cols-2">
               {collection
                 .map((record, index) => (
                   <Link
@@ -41,20 +41,20 @@ const Collection = () => {
                   </Link>
                 ))
                 .reverse()}
-            </div>
+            </section>
           ) : (
-            <div className="min-h-screen flex flex-col justify-center">
+            <section className="min-h-screen flex flex-col justify-center">
               <h1 className="text-2xl text-center mx-auto w-4/6">
                 It seems your bag is still EMPTY! Let's dig some good record!
               </h1>
-              <div className="mx-auto flex">
+              <nav className="mx-auto flex">
                 <NavButton path="/" role="HOME" icon={HomeIcon} />
-              </div>
-            </div>
+              </nav>
+            </section>
           )}
         </div>
       )}
-    </section>
+    </article>
   );
 };
 

@@ -37,7 +37,7 @@ const LogIn = () => {
   return (
     <section className="p-4 sm:p-24 max-w-screen-xl mx-auto flex">
       <div className="w-full">
-        <div className=" mx-auto text-white bg-black lg:w-3/6">
+        <figure className=" mx-auto text-white bg-black lg:w-3/6">
           <img
             src="https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1353&q=80"
             className="w-max-full"
@@ -85,7 +85,7 @@ const LogIn = () => {
               </button>
             </div>
           </form>
-        </div>
+        </figure>
       </div>
     </section>
   );

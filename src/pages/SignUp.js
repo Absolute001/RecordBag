@@ -60,7 +60,7 @@ const SignUp = () => {
   ) : (
     <section className="p-4 sm:p-24 max-w-screen-xl mx-auto flex">
       <div className=" w-full">
-        <div className=" mx-auto text-white bg-black lg:w-3/6">
+        <figure className=" mx-auto text-white bg-black lg:w-3/6">
           <img
             src="https://images.unsplash.com/photo-1581041122145-9f17c04cd153?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80"
             className="w-max-full"
@@ -141,7 +141,7 @@ const SignUp = () => {
               </button>
             </div>
           </form>
-        </div>
+        </figure>
       </div>
     </section>
   );

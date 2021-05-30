@@ -35,15 +35,15 @@ const Shop = () => {
     <section className="p-4 max-w-screen-xl mx-auto min-h-screen">
       {/*  BACK BUTTON */}
 
-      <div className="flex justify-items-start">
+      <nav className="flex justify-items-start">
         <NavButton path="/" role="HOME" icon={HomeIcon} />
         {currentUser && (
           <NavButton role="COLLECTION" icon={Bag} path={`/collection`} />
         )}
-      </div>
+      </nav>
 
-      <div className="bg-black w-full h-32 sm:h-48 flex mb-4">
-        <div className="h-full flex mx-auto sm:mx-0 sm:ml-8 p-4">
+      <section className="bg-black w-full h-32 sm:h-48 flex mb-4">
+        <figure className="h-full flex mx-auto sm:mx-0 sm:ml-8 p-4">
           {currentChannel.length !== 0 && (
             <>
               <img
@@ -56,8 +56,8 @@ const Shop = () => {
               </h1>
             </>
           )}
-        </div>
-      </div>
+        </figure>
+      </section>
 
       {/* ------ */}
 
@@ -66,7 +66,7 @@ const Shop = () => {
       </div>
 
       {/*  VIDEO PREVIEW COMPONENT*/}
-      <div className="flex flex-col md:grid grid-cols-2">
+      <section className="flex flex-col md:grid grid-cols-2">
         {videos.length !== 0 &&
           videos[0].items.map((video, index) => (
             <Link
@@ -83,11 +83,11 @@ const Shop = () => {
               />
             </Link>
           ))}
-      </div>
+      </section>
 
       {/*   NAVIGATION MENU */}
 
-      <div className="text-4xl flex flex-col max-w-screen-sm mt-4 mx-auto">
+      <nav className="text-4xl flex flex-col max-w-screen-sm mt-4 mx-auto">
         <div className="mx-auto flex">
           {pageFlag > 1 && (
             <MdNavigateBefore
@@ -121,7 +121,7 @@ const Shop = () => {
             />
           )}
         </div>
-      </div>
+      </nav>
 
       {/* END OF SECTION */}
     </section>

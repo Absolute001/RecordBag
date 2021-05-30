@@ -4,7 +4,7 @@ import Logo from "./img/Logo.png";
 import appFirebase from "../firebase/firebase";
 import { AiOutlineLogout } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const currentUser = useSelector((state) => state.currentUser);
@@ -16,14 +16,10 @@ const Navbar = () => {
   return (
     <nav className=" bg-gray-100 w-full">
       <div className="flex justify-between max-w-screen-xl mx-auto p-4">
-        <div className="flex items-center ">
-          <Link to="/">
-            <img src={Logo} className="sm:w-8 w-6" alt="logo" />
-          </Link>
-          <Link to="/">
-            <h1 className="sm:text-2xl text-lg font-semibold">RecordBAG</h1>
-          </Link>
-        </div>
+        <Link className="flex items-center " to="/">
+          <img src={Logo} className="sm:w-8 w-6" alt="logo" />
+          <h1 className="sm:text-2xl text-lg font-semibold">RecordBAG</h1>
+        </Link>
 
         {currentUser.user ? (
           <div className="flex items-center font-semibold md:text-xl">
