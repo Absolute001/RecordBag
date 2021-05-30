@@ -3,7 +3,7 @@ import HeroImg from "./img/hero.jpeg";
 
 const Hero = () => {
   return (
-    <article className="p-4 lg:mt-16 pb-0 max-w-screen-xl mx-auto">
+    <header className="p-4 lg:mt-16 pb-0 max-w-screen-xl mx-auto">
       <figure className="lg:relative">
         <img src={HeroImg} className="w-full max-h-full" alt="Hero cover" />
         <figcaption className="lg:absolute justify-end right-0 bottom-0 lg:bg-black lg:p-4">
@@ -26,7 +26,7 @@ const Hero = () => {
           the cheapest offer on that record you've been looking for all along.
         </p>
       </section>
-    </article>
+    </header>
   );
 };
 

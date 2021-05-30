@@ -18,7 +18,7 @@ const Records = (props) => {
   };
 
   return (
-    <article
+    <section
       className="h-full border-2 border-black py-2 text-black lg:hover:bg-gray-600 
     lg:hover:text-white lg:transform transition-transform duration-500 lg:hover:-translate-y-2"
     >
@@ -41,7 +41,7 @@ const Records = (props) => {
           }}
         ></figcaption>
       </figure>
-    </article>
+    </section>
   );
 };
 

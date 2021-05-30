@@ -8,8 +8,8 @@ const AllShops = (props) => {
   return (
     <main>
       <Hero />
-      <article className="lg:mt-16 p-4 max-w-screen-xl mx-auto">
-        <section
+      <section className="lg:mt-16 p-4 max-w-screen-xl mx-auto">
+        <div
           className="p-4 grid grid-cols-2
            sm:grid-cols-3 gap-x-2 gap-y-4
            bg-black
@@ -48,8 +48,8 @@ const AllShops = (props) => {
             My job is to be a DJ and make people dance so if people dance, I've
             done my job. - Jeff Mills
           </q>
-        </section>
-      </article>
+        </div>
+      </section>
       <HotRecordsContainer />
     </main>
   );

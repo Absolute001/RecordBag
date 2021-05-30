@@ -6,15 +6,15 @@ import RecordActionList from "../container/RecordActionList";
 
 const Player = (props) => {
   return (
-    <>
-      <section className="w-full bg-black">
+    <section>
+      <div className="w-full bg-black">
         <Iframe
           url={`https://www.youtube.com/embed/${props.playingVideo}?rel=0`}
           className="my-4 w-full h-72 sm:h-96 mx-auto"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
-      </section>
+      </div>
       <div className="border-b border-black flex flex-col lg:flex-row">
         <section className="flex flex-col lg:w-4/6">
           <h1
@@ -44,7 +44,7 @@ const Player = (props) => {
           <CopyToClip />
         </nav>
       </div>
-    </>
+    </section>
   );
 };
 

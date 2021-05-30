@@ -101,7 +101,7 @@ const RecordActionList = (props) => {
   };
 
   return (
-    <>
+    <nav>
       <ActionsButton
         icon={isInCollection ? inTheCollection : addToCollection}
         alt="Add To Your Collection"
@@ -119,7 +119,7 @@ const RecordActionList = (props) => {
           }, 400);
         }}
       />
-    </>
+    </nav>
   );
 };
 

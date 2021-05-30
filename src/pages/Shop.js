@@ -32,7 +32,7 @@ const Shop = () => {
   return loading ? (
     <Loading />
   ) : (
-    <section className="p-4 max-w-screen-xl mx-auto min-h-screen">
+    <article className="p-4 max-w-screen-xl mx-auto min-h-screen">
       {/*  BACK BUTTON */}
 
       <nav className="flex justify-items-start">
@@ -124,7 +124,7 @@ const Shop = () => {
       </nav>
 
       {/* END OF SECTION */}
-    </section>
+    </article>
   );
 };
 export default Shop;

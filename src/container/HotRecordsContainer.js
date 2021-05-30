@@ -23,7 +23,7 @@ const HotRecordsContainer = () => {
         </span>
         <span className="text-lg"> - Users' Top 10 </span>
       </h1>
-      <section className="flex flex-col sm:grid grid-cols-2 mt-2">
+      <div className="flex flex-col sm:grid grid-cols-2 mt-2">
         {hotRecords.map((record, index) => (
           <Link
             className="mx-2 my-4"
@@ -39,7 +39,7 @@ const HotRecordsContainer = () => {
             />
           </Link>
         ))}
-      </section>
+      </div>
     </section>
   );
 };

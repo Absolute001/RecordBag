@@ -58,7 +58,7 @@ const SignUp = () => {
   return loading ? (
     <Loading />
   ) : (
-    <section className="p-4 sm:p-24 max-w-screen-xl mx-auto flex">
+    <article className="p-4 sm:p-24 max-w-screen-xl mx-auto flex">
       <div className=" w-full">
         <figure className=" mx-auto text-white bg-black lg:w-3/6">
           <img
@@ -143,7 +143,7 @@ const SignUp = () => {
           </form>
         </figure>
       </div>
-    </section>
+    </article>
   );
 };
 

@@ -31,7 +31,7 @@ const SelectedRecord = () => {
   return loading ? (
     <Loading />
   ) : (
-    <section className="max-w-screen-xl min-h-screen mx-auto p-4 h-auto">
+    <article className="max-w-screen-xl min-h-screen mx-auto p-4 h-auto">
       <nav className="flex justify-items-start">
         <NavButton path={`/shop/${channelId}`} role="SHOP" icon={Vynil} />
         {currentUser && (
@@ -49,11 +49,11 @@ const SelectedRecord = () => {
       }
 
       {discogsRecord.length === 0 ? (
-        <div className="flex h-40 text-center">
+        <section className="flex h-40 text-center">
           <p className="my-auto mx-auto uppercase text-xl">
             We can't find this beast we're sorry
           </p>
-        </div>
+        </section>
       ) : (
         <DiscogsResults
           cover={discogsRecord.results[0].cover_image}
@@ -66,7 +66,7 @@ const SelectedRecord = () => {
           uri={discogsRecord.results[0].uri}
         />
       )}
-    </section>
+    </article>
   );
 };
 

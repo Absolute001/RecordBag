@@ -2,7 +2,7 @@ import React from "react";
 
 const DiscogsResults = (props) => {
   return (
-    <article className="flex flex-col">
+    <section className="flex flex-col">
       <h1 className="text-4xl my-12"> Here you can find this hottie:</h1>
       <figure className="flex flex-col md:flex-row border-black border-2 p-4 mb-12">
         <img
@@ -42,7 +42,7 @@ const DiscogsResults = (props) => {
           </a>
         </figcaption>
       </figure>
-    </article>
+    </section>
   );
 };
 
