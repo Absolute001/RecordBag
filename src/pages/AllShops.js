@@ -16,13 +16,12 @@ const AllShops = (props) => {
            "
         >
           <h1
-            className="text-white text-lg
+            className="text-white text-xl
             md:text-3xl text-left
           col-start-1 md:col-end-2
           lg:text-6xl uppercase sm:p-4 p-2 my-auto font-bold"
           >
-            These are the available shops, dig in them and start your huge
-            collection
+            These are the available shops, dig in and start your collection
           </h1>
           {props.channels.map((channel, index) => (
             <div
