@@ -1,6 +1,5 @@
 import { applyMiddleware, createStore, combineReducers } from "redux";
 import fetchReducer from "./fetch";
-import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import userSignUpReducer from "./userSignUp";
 import userLogInReducer from "./userLogIn";
@@ -17,8 +16,5 @@ const rootReducer = combineReducers({
   hotRecordsState: hotRecordsReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 export default store;
