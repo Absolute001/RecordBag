@@ -16,11 +16,10 @@ const AllShops = (props) => {
            "
         >
           <h1
-            className="text-white text-xl
+            className="text-white text-lg
             md:text-3xl text-left
-          col-start-1 col-end-3
-          md:col-start-1 md:col-end-2
-          lg:text-6xl uppercase p-4 my-auto font-bold"
+          col-start-1 md:col-end-2
+          lg:text-6xl uppercase sm:p-4 p-2 my-auto font-bold"
           >
             These are the available shops, dig in them and start your huge
             collection
@@ -40,13 +39,13 @@ const AllShops = (props) => {
           ))}
           <q
             className="text-white text-right
-           text-lg md:text-3xl lg:text-5xl
-           col-start-1 col-end-3
-           md:col-start-3 md:col-end-4
-           uppercase p-4 my-auto"
+            italic
+            text-lg 
+            md:text-3xl lg:text-5xl p-2
+           uppercase sm:p-4 my-auto"
           >
             My job is to be a DJ and make people dance so if people dance, I've
-            done my job. - Jeff Mills
+            done my job. <br />- Jeff Mills
           </q>
         </div>
       </section>
